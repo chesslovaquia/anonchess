@@ -21,6 +21,10 @@ distclean: clean
 docker:
 	@./docker/build.sh
 
+.PHONY: html
+html:
+	@./html/gen.sh index.html
+
 .PHONY: fmt
 fmt:
 	@rustfmt -l ./src/*.rs
@@ -30,7 +34,7 @@ build-deps:
 	@./docker/build-deps.sh
 
 .PHONY: build
-build:
+build: html
 	wasm-pack build --target web --out-dir ./static/pkg $(WASM_FLAGS)
 
 .PHONY: release
