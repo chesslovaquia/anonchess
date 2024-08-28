@@ -24,6 +24,7 @@ docker:
 .PHONY: html
 html:
 	@./html/gen.sh index.html
+	@./html/gen.sh play.html
 
 .PHONY: fmt
 fmt:
