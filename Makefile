@@ -35,6 +35,7 @@ build:
 
 .PHONY: release
 release:
+	@rm -vrf ./static/pkg
 	@$(MAKE) build WASM_FLAGS=--release
 
 .PHONY: test
