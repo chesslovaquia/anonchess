@@ -1,0 +1,32 @@
+.board {
+	display: grid;
+	grid-template-columns: repeat(8, 50px);
+	grid-template-rows: repeat(8, 50px);
+	margin: auto;
+}
+
+.square {
+	width: 50px;
+	height: 50px;
+}
+
+.white {
+/*
+	background-color: #f0d9b5;
+*/
+	background-color: #eeeeee;
+}
+
+.black {
+/*
+	background-color: #b58863;
+*/
+	background-color: #111111;
+}
+
+.piece {
+	font-size: 40px;
+	text-align: center;
+	line-height: 50px;
+	color: #cc0000;
+}
