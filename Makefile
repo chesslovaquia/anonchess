@@ -1,3 +1,5 @@
+WASM_FLAGS ?= --dev
+
 .PHONY: default
 default: build
 
@@ -9,7 +11,7 @@ all:
 
 .PHONY: clean
 clean:
-	@rm -vrf Cargo.lock pkg publish
+	@rm -vrf Cargo.lock pkg publish static/pkg
 
 .PHONY: distclean
 distclean: clean
@@ -29,7 +31,11 @@ build-deps:
 
 .PHONY: build
 build:
-	@wasm-pack build --target web
+	wasm-pack build --target web --out-dir ./static/pkg $(WASM_FLAGS)
+
+.PHONY: release
+release:
+	@$(MAKE) build WASM_FLAGS=--release
 
 .PHONY: test
 test:
