@@ -1,4 +1,5 @@
 WASM_FLAGS ?= --dev
+WEBPACK_FLAGS ?= --mode development
 
 .PHONY: default
 default: build
@@ -21,11 +22,6 @@ distclean: clean
 docker: distclean
 	@./docker/build.sh
 
-.PHONY: html
-html:
-	@./html/gen.sh index.html
-	@./html/gen.sh play.html
-
 .PHONY: fmt
 fmt:
 	@rustfmt -l ./src/*.rs
@@ -35,13 +31,14 @@ build-deps:
 	@./docker/build-deps.sh
 
 .PHONY: build
-build: html
+build:
 	wasm-pack build --target web --out-dir ./static/pkg $(WASM_FLAGS)
+	webpack build $(WEBPACK_FLAGS)
 
 .PHONY: release
 release:
-	@rm -vrf ./static/pkg
-	@$(MAKE) build WASM_FLAGS=--release
+	@rm -vrf static/pkg static/ui
+	@$(MAKE) build WASM_FLAGS=--release WEBPACK_FLAGS='--mode production'
 
 .PHONY: test
 test:
@@ -58,10 +55,10 @@ publish:
 	@install -v -m 0755 -d ./publish/w3css/4
 	@install -v -m 0644 -t ./publish/w3css/4 ./static/w3css/4/w3.css
 
-	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.css
-
-	@install -v -m 0755 -d ./publish/js
-	@install -v -m 0644 -t ./publish/js ./static/js/*.js
+	@install -v -m 0644 -t ./publish ./static/*.html
 
 	@install -v -m 0755 -d ./publish/pkg
 	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess*
+
+	@install -v -m 0755 -d ./publish/ui
+	@install -v -m 0644 -t ./publish/ui ./static/ui/bundle.js
