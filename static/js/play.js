@@ -25,9 +25,11 @@ async function renderBoard() {
 			squareElement.classList.add('square');
 
 			if ((rowIndex + colIndex) % 2 === 0) {
-				squareElement.classList.add('white');
+				//~ squareElement.classList.add('white');
+				squareElement.classList.add('w3-grey');
 			} else {
-				squareElement.classList.add('black');
+				//~ squareElement.classList.add('black');
+				squareElement.classList.add('w3-dark-grey');
 			}
 
 			const piece = {
@@ -38,6 +40,7 @@ async function renderBoard() {
 			if (piece) {
 				const pieceElement = document.createElement('span');
 				pieceElement.classList.add('piece');
+				pieceElement.classList.add('w3-text-black');
 				pieceElement.innerHTML = piece;
 				squareElement.appendChild(pieceElement);
 			}
