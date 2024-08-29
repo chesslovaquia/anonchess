@@ -33,6 +33,10 @@
 	align-items: center;
 }
 
+.chess-square:hover {
+	border: 1px solid white;
+}
+
 .chess-piece {
 	width: 90%;  /* Adjust this value to fit the pieces on the squares */
 	height: auto;
