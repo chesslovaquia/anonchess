@@ -5,7 +5,6 @@ import GameControls from './GameControls';
 function App() {
 	return (
 		<div className="w3-container">
-			<GameControls />
 			<ChessBoard />
 		</div>
 	);
