@@ -16,18 +16,8 @@
 	height: 100%;
 }
 
-.white {
-/*
-	background-color: #f0d9b5;
-*/
-	background-color: #eeeeee;
-}
-
-.black {
-/*
-	background-color: #b58863;
-*/
-	background-color: #111111;
+.square:hover {
+	border: 0.2vw solid white;
 }
 
 .piece {
