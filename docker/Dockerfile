@@ -11,7 +11,7 @@ ENV HOME /root
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV APT_INSTALL bash openssl ca-certificates build-essential rustup nodejs
+ENV APT_INSTALL bash openssl ca-certificates build-essential rustup nodejs npm
 
 RUN apt-get clean \
 	&& apt-get update -yy \
@@ -23,6 +23,9 @@ RUN apt-get clean \
 		/var/cache/apt/archives/*.deb \
 		/var/cache/apt/*cache.bin
 
+#
+# devel user
+#
 ARG DEVEL_UID=1000
 ARG DEVEL_GID=1000
 
@@ -36,18 +39,48 @@ RUN groupadd -o -g ${DEVEL_GID} devel \
 RUN printf 'umask %s\n' '027' >>/home/devel/.profile
 RUN printf "export PS1='%s '\n" '\u@\h:\W\$' >>/home/devel/.profile
 
+#
+# rust setup
+#
 ADD ./build-deps.sh /var/tmp/build-deps.sh
 RUN chmod -v 555 /var/tmp/build-deps.sh
 
+#
+# react setup
+#
+RUN install -v -d -m 0775 -o root  -g devel /usr/local/bin
+RUN install -v -d -m 0755 -o devel -g devel /usr/local/lib/node_modules
+RUN install -v -d -m 0755 -o devel -g devel /home/devel/anonchess
+
+ADD build/package.json /home/devel/anonchess
+ADD build/package-lock.json /home/devel/anonchess
+
+#
+# devel user
+#
 USER devel:devel
 WORKDIR /home/devel
 
 ENV USER devel
 ENV HOME /home/devel
 
-ENV RUST_VERSION 1.80.1
+#
+# react setup
+#
+RUN npm --version
 
-RUN mkdir -vp -m 0750 ${HOME}/bin
+WORKDIR /home/devel/anonchess
+
+RUN npm install --global react react-dom
+RUN npm install --global webpack webpack-cli webpack-dev-server babel-loader \
+	@babel/core @babel/preset-env @babel/preset-react
+
+WORKDIR /home/devel
+
+#
+# rust setup
+#
+ENV RUST_VERSION 1.80.1
 
 RUN rustup --version && \
 	rustup default ${RUST_VERSION}

@@ -11,14 +11,14 @@ all:
 
 .PHONY: clean
 clean:
-	@rm -vrf Cargo.lock pkg publish static/pkg
+	@rm -vrf Cargo.lock pkg publish static/pkg docker/build
 
 .PHONY: distclean
 distclean: clean
-	@rm -vrf target
+	@rm -vrf target node_modules
 
 .PHONY: docker
-docker:
+docker: distclean
 	@./docker/build.sh
 
 .PHONY: html
