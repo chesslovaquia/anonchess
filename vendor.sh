@@ -3,8 +3,7 @@ set -eu
 
 lila_raw=https://github.com/lichess-org/lila/raw/master
 
-
-for t in cburnett merida; do
+for t in cburnett merida mpchess; do
 	mkdir -vp "./static/lila/public/piece/${t}"
 	for x in b w; do
 		for y in B K N P Q R; do
@@ -13,7 +12,7 @@ for t in cburnett merida; do
 			dst="./static/lila/public/piece/${t}/${n}.svg"
 			echo "${src}"
 			echo "  ${dst}"
-			##wget -q -c -O "${dst}" "${src}"
+			wget -q -c -O "${dst}" "${src}"
 		done
 	done
 done
