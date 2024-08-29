@@ -3,6 +3,16 @@ set -eu
 
 lila_raw=https://github.com/lichess-org/lila/raw/master
 
+mkdir -vp ./static/lila
+
+for f in COPYING.md LICENSE README.md; do
+	src="${lila_raw}/${f}"
+	dst="./static/lila/${f}"
+	echo "${src}"
+	echo "  ${dst}"
+	wget -q -c -O "${dst}" "${src}"
+done
+
 mkdir -vp ./static/lila/public/piece
 mkdir -vp ./static/lila/public/piece-css
 
