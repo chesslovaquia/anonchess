@@ -12,36 +12,37 @@ function ChessBoard() {
 		"RNBQKBNR",
 	];
 
+	const pieceToFile = {
+		'r': 'bR.svg', 'n': 'bN.svg', 'b': 'bB.svg',
+		'q': 'bQ.svg', 'k': 'bK.svg', 'p': 'bP.svg',
+		'R': 'wR.svg', 'N': 'wN.svg', 'B': 'wB.svg',
+		'Q': 'wQ.svg', 'K': 'wK.svg', 'P': 'wP.svg',
+	};
+
 	const renderBoard = () => {
 		return board.map((row, rowIndex) => (
-			<div className="w3-row" key={rowIndex}>
+			<div className="chess-row" key={rowIndex}>
 				{row.split('').map((square, colIndex) => (
-					<div
-						className={`w3-col s1 w3-center w3-border ${
-							(rowIndex + colIndex) % 2 === 0 ? 'w3-light-grey' : 'w3-dark-grey'
-						}`}
-						key={colIndex}
-					>
-						<span className="w3-large">
-							{square !== ' ' ? renderPiece(square) : ''}
-						</span>
+					<div className="chess-square" key={colIndex}>
+						{square !== ' ' && (
+							<img
+								src={`./lila/public/piece/cburnett/${pieceToFile[square]}`}
+								alt=""
+								className="chess-piece"
+							/>
+						)}
 					</div>
 				))}
 			</div>
 		));
 	};
 
-	const renderPiece = (piece) => {
-		const pieces = {
-			'r': '♜', 'n': '♞', 'b': '♝', 'q': '♛', 'k': '♚', 'p': '♟',
-			'R': '♖', 'N': '♘', 'B': '♗', 'Q': '♕', 'K': '♔', 'P': '♙',
-		};
-		return pieces[piece] || '';
-	};
-
 	return (
-		<div className="w3-margin-top">
-			{renderBoard()}
+		<div className="chessboard-container">
+			<img src="./lila/public/images/board/wood4.jpg" alt="Chessboard" className="chessboard-image" />
+			<div className="pieces-overlay">
+				{renderBoard()}
+			</div>
 		</div>
 	);
 }

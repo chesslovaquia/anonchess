@@ -30,10 +30,18 @@ fmt:
 build-deps:
 	@./docker/build-deps.sh
 
+.PHONY: build-rs
+build-rs:
+	wasm-pack build --target web --out-dir ./static/pkg $(WASM_FLAGS)
+
+.PHONY: build-js
+build-js:
+	webpack build $(WEBPACK_FLAGS)
+
 .PHONY: build
 build:
-	wasm-pack build --target web --out-dir ./static/pkg $(WASM_FLAGS)
-	webpack build $(WEBPACK_FLAGS)
+	@$(MAKE) build-rs
+	@$(MAKE) build-js
 
 .PHONY: release
 release:
@@ -55,7 +63,7 @@ publish:
 	@install -v -m 0755 -d ./publish/w3css/4
 	@install -v -m 0644 -t ./publish/w3css/4 ./static/w3css/4/w3.css
 
-	@install -v -m 0644 -t ./publish ./static/*.html
+	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.css
 
 	@install -v -m 0755 -d ./publish/pkg
 	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess*
