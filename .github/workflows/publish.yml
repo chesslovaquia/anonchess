@@ -18,8 +18,8 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-env:
-  CARGO_TERM_COLOR: never
+#~ env:
+  #~ CARGO_TERM_COLOR: never
 
 jobs:
   deploy:
@@ -37,17 +37,8 @@ jobs:
       - name: build-deps
         run: make build-deps
 
-      - name: build
-        run: make
-
-      - name: test
-        run: make test
-
-      - name: release
-        run: make release
-
-      - name: publish
-        run: make publish
+      - name: all
+        run: make all
 
       - name: setup pages
         uses: actions/configure-pages@v5

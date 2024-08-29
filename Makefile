@@ -8,6 +8,7 @@ default: build
 all:
 	@$(MAKE) build
 	@$(MAKE) test
+	@$(MAKE) release
 	@$(MAKE) publish
 
 .PHONY: clean
@@ -26,17 +27,26 @@ docker: distclean
 fmt:
 	@rustfmt -l ./src/*.rs
 
-.PHONY: build-deps
-build-deps:
+.PHONY: rs-deps
+rs-deps:
 	@./docker/build-deps.sh
 
 .PHONY: build-rs
 build-rs:
 	wasm-pack build --target web --out-dir ./static/pkg $(WASM_FLAGS)
 
+.PHONY: js-deps
+js-deps:
+	@npm update
+
 .PHONY: build-js
 build-js:
-	webpack build $(WEBPACK_FLAGS)
+	npx webpack build $(WEBPACK_FLAGS)
+
+.PHONY: build-deps
+build-deps:
+	@$(MAKE) rs-deps
+	@$(MAKE) js-deps
 
 .PHONY: build
 build:
