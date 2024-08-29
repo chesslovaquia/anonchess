@@ -46,16 +46,6 @@ ADD ./build-deps.sh /var/tmp/build-deps.sh
 RUN chmod -v 555 /var/tmp/build-deps.sh
 
 #
-# react setup
-#
-RUN install -v -d -m 0775 -o root  -g devel /usr/local/bin
-RUN install -v -d -m 0755 -o devel -g devel /usr/local/lib/node_modules
-RUN install -v -d -m 0755 -o devel -g devel /home/devel/anonchess
-
-ADD build/package.json /home/devel/anonchess
-ADD build/package-lock.json /home/devel/anonchess
-
-#
 # devel user
 #
 USER devel:devel
@@ -63,19 +53,6 @@ WORKDIR /home/devel
 
 ENV USER devel
 ENV HOME /home/devel
-
-#
-# react setup
-#
-RUN npm --version
-
-WORKDIR /home/devel/anonchess
-
-RUN npm install --global react react-dom
-RUN npm install --global webpack webpack-cli webpack-dev-server babel-loader \
-	@babel/core @babel/preset-env @babel/preset-react
-
-WORKDIR /home/devel
 
 #
 # rust setup
