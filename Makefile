@@ -50,15 +50,15 @@ test:
 .PHONY: publish
 publish:
 	@rm -rf ./publish
-
 	@install -v -m 0755 -d ./publish
-	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.css
 
 	@./vendor-publish.sh
 
 	@install -v -m 0755 -d ./publish/w3css
 	@install -v -m 0755 -d ./publish/w3css/4
 	@install -v -m 0644 -t ./publish/w3css/4 ./static/w3css/4/w3.css
+
+	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.css
 
 	@install -v -m 0755 -d ./publish/js
 	@install -v -m 0644 -t ./publish/js ./static/js/*.js

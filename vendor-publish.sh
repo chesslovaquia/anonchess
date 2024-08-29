@@ -28,13 +28,9 @@ for t in cburnett merida mpchess; do
 	done
 
 	# css
-	for x in b w; do
-		for y in B K N P Q R; do
-			src="./static/lila/public/piece-css/${t}.css"
-			dst="./publish/lila/public/piece-css/${t}.css"
-			install -v -m 0644 "${src}" "${dst}"
-		done
-	done
+	src="./static/lila/public/piece-css/${t}.css"
+	dst="./publish/lila/public/piece-css/${t}.css"
+	install -v -m 0644 "${src}" "${dst}"
 
 done
 

@@ -32,15 +32,11 @@ for t in cburnett merida mpchess; do
 	done
 
 	# css
-	for x in b w; do
-		for y in B K N P Q R; do
-			src="${lila_raw}/public/piece-css/${t}.css"
-			dst="./static/lila/public/piece-css/${t}.css"
-			echo "${src}"
-			echo "  ${dst}"
-			wget -q -c -O "${dst}" "${src}"
-		done
-	done
+	src="${lila_raw}/public/piece-css/${t}.css"
+	dst="./static/lila/public/piece-css/${t}.css"
+	echo "${src}"
+	echo "  ${dst}"
+	wget -q -c -O "${dst}" "${src}"
 
 done
 
