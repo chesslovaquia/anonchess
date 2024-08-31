@@ -10,16 +10,24 @@ import (
 )
 
 func main() {
-
-	// anonc_init
-	anonc_init := js.FuncOf(func(this js.Value, args []js.Value) any {
-		v := runtime.Version()
-		fmt.Println("anonc_init:", v)
-		return v
+	// anonc_board
+	anonc_board := js.FuncOf(func(this js.Value, args []js.Value) any {
+		fmt.Println("anonc_board")
+		return []interface{}{
+			"rnbqkbnr",
+			"pppppppp",
+			"        ",
+			"        ",
+			"        ",
+			"        ",
+			"PPPPPPPP",
+			"RNBQKBNR",
+		}
 	})
-	defer anonc_init.Release()
-	js.Global().Set("anonc_init", anonc_init)
+	defer anonc_board.Release()
+	js.Global().Set("anonc_board", anonc_board)
 
-	fmt.Println("anonchess.wasm: main")
+	// main loop
+	fmt.Println("anonchess.wasm:", runtime.Version())
 	select {}
 }

@@ -5,18 +5,7 @@ import React from 'react';
 
 function ChessBoard() {
 
-	anonc_init();
-
-	const board = [
-		"rnbqkbnr",
-		"pppppppp",
-		"        ",
-		"        ",
-		"        ",
-		"        ",
-		"PPPPPPPP",
-		"RNBQKBNR",
-	];
+	const board = anonc_board();
 
 	const pieceToFile = {
 		'r': 'bR.svg', 'n': 'bN.svg', 'b': 'bB.svg',
