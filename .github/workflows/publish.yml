@@ -34,9 +34,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: build-deps
-        run: make build-deps
-
       - name: all
         run: make all
 

@@ -1,70 +1,41 @@
-WASM_FLAGS ?= --dev
-WEBPACK_FLAGS ?= --mode development
-
 .PHONY: default
 default: build
 
 .PHONY: all
 all:
+	@env
+	@echo "GOOS=`go env GOOS` GOARCH=`go env GOARCH`"
+	@echo "  `go version`"
+	@echo "  nodejs `node --version`"
 	@$(MAKE) build
 	@$(MAKE) test
-	@$(MAKE) release
 	@$(MAKE) publish
 
 .PHONY: clean
 clean:
-	@rm -vrf Cargo.lock pkg publish static/pkg docker/build
+	@rm -vrf static/pkg publish
 
 .PHONY: distclean
 distclean: clean
-	@rm -vrf target node_modules
 
 .PHONY: docker
-docker: distclean
-	@./docker/build.sh
-
-.PHONY: fmt
-fmt:
-	@rustfmt -l ./src/*.rs
-
-.PHONY: rs-deps
-rs-deps:
-	@./docker/build-deps.sh
-
-.PHONY: build-rs
-build-rs:
-	wasm-pack build --target web --out-dir ./static/pkg $(WASM_FLAGS)
-
-.PHONY: js-deps
-js-deps:
-	@npm update
-
-.PHONY: build-js
-build-js:
-	npx webpack build $(WEBPACK_FLAGS)
-
-.PHONY: build-deps
-build-deps:
-	@$(MAKE) rs-deps
-	@$(MAKE) js-deps
+docker:
+	@docker/build.sh
 
 .PHONY: build
 build:
-	@$(MAKE) build-rs
-	@$(MAKE) build-js
-
-.PHONY: release
-release:
-	@rm -vrf static/pkg static/ui
-	@$(MAKE) build WASM_FLAGS=--release WEBPACK_FLAGS='--mode production'
+	@rm -rf static/pkg
+	@install -m 0750 -d static/pkg
+	@install -v -m 0640 -t static/pkg "`go env GOROOT`/misc/wasm/wasm_exec.js"
+	@go build -o static/pkg/main.wasm
 
 .PHONY: test
 test:
-	@wasm-pack test --node --lib
+	@go test -exec="`go env GOROOT`/misc/wasm/go_js_wasm_exec"
 
 .PHONY: publish
 publish:
-	@rm -rf ./publish
+	@rm -rf publish
 	@install -v -m 0755 -d ./publish
 
 	@./vendor-publish.sh
@@ -73,10 +44,14 @@ publish:
 	@install -v -m 0755 -d ./publish/w3css/4
 	@install -v -m 0644 -t ./publish/w3css/4 ./static/w3css/4/w3.css
 
-	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.css
+	@install -v -m 0644 -t ./publish ./static/*.html
+
+	@install -v -m 0755 -d ./publish/css
+	@install -v -m 0644 -t ./publish/css ./static/css/*.css
 
 	@install -v -m 0755 -d ./publish/pkg
-	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess*
+	@install -v -m 0644 -t ./publish/pkg ./static/pkg/wasm_exec.js
+	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess.wasm
 
 	@install -v -m 0755 -d ./publish/ui
 	@install -v -m 0644 -t ./publish/ui ./static/ui/bundle.js
