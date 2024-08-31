@@ -4,6 +4,9 @@
 import React from 'react';
 
 function ChessBoard() {
+
+	anonc_init();
+
 	const board = [
 		"rnbqkbnr",
 		"pppppppp",
@@ -48,6 +51,7 @@ function ChessBoard() {
 			</div>
 		</div>
 	);
+
 }
 
 export default ChessBoard;
