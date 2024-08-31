@@ -10,7 +10,7 @@ all:
 	@echo "  nodejs `node --version`"
 	@echo "  npm `npm --version`"
 	@echo "  npx `npx --version`"
-	@$(MAKE) build-deps build test release publish
+	@$(MAKE) build-deps test release publish
 
 .PHONY: clean
 clean:
