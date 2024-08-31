@@ -34,8 +34,18 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
+      - name: build deps
+        run: make build-deps
+
+      - name: golang
+        uses: actions/setup-go@v5
+        with:
+          check-latest: true
+          go-version-file: './go.mod'
+          #~ cache-dependency-path: './go.sum'
+
       - name: all
-        run: make all
+        run: python3 ./.github/cleanenv.py make all
 
       - name: setup pages
         uses: actions/configure-pages@v5

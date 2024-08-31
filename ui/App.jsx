@@ -1,3 +1,6 @@
+// Copyright Jeremías Casteglione <jrmsdev@gmail.com>
+// See LICENSE file.
+
 import React from 'react';
 import ChessBoard from './ChessBoard';
 import GameControls from './GameControls';

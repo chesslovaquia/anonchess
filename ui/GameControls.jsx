@@ -1,3 +1,6 @@
+// Copyright Jeremías Casteglione <jrmsdev@gmail.com>
+// See LICENSE file.
+
 import React, { useState } from 'react';
 
 function GameControls() {

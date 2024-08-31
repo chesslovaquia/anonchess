@@ -11,7 +11,7 @@ ENV HOME /root
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV APT_INSTALL bash openssl ca-certificates build-essential golang nodejs
+ENV APT_INSTALL bash openssl ca-certificates build-essential golang nodejs npm
 
 RUN apt-get clean \
 	&& apt-get update -yy \
