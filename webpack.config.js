@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-	entry: './ui/index.js',
-	output: {
-		path: path.resolve(__dirname, 'static', 'ui'),
-		filename: 'bundle.js',
-	},
+	//~ entry: './ui/index.js',
+	//~ output: {
+		//~ path: path.resolve(__dirname, 'static', 'ui'),
+		//~ filename: 'bundle.js',
+	//~ },
 	module: {
 		rules: [
 			{

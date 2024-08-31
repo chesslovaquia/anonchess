@@ -31,7 +31,8 @@ build-deps:
 
 .PHONY: build-js
 build-js:
-	npx webpack build $(WEBPACK_FLAGS)
+	npx webpack build $(WEBPACK_FLAGS) --entry ./ui/home/index.js -o $(PWD)/static/ui/home
+	npx webpack build $(WEBPACK_FLAGS) --entry ./ui/play/index.js -o $(PWD)/static/ui/play
 
 .PHONY: build-go
 build-go:
@@ -40,6 +41,7 @@ build-go:
 	@rm -rf static/pkg
 	@install -m 0750 -d static/pkg
 	go build -o static/pkg/anonchess.wasm
+	go build -o static/pkg/anonchess-play.wasm ./cmd/play
 
 .PHONY: build
 build: build-go build-js

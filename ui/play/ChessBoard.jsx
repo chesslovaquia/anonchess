@@ -21,7 +21,7 @@ function ChessBoard() {
 					<div className="chess-square" key={colIndex}>
 						{square !== ' ' && (
 							<img
-								src={`./lila/public/piece/cburnett/${pieceToFile[square]}`}
+								src={`../lila/public/piece/cburnett/${pieceToFile[square]}`}
 								alt=""
 								className="chess-piece"
 							/>
@@ -34,7 +34,7 @@ function ChessBoard() {
 
 	return (
 		<div className="chessboard-container">
-			<img src="./lila/public/images/board/wood4.jpg" alt="Chessboard" className="chessboard-image" />
+			<img src="../lila/public/images/board/wood4.jpg" alt="Chessboard" className="chessboard-image" />
 			<div className="pieces-overlay">
 				{renderBoard()}
 			</div>

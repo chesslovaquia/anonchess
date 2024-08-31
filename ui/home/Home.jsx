@@ -2,15 +2,13 @@
 // See LICENSE file.
 
 import React from 'react';
-import ChessBoard from './ChessBoard';
-import GameControls from './GameControls';
 
-function App() {
+function Home() {
 	return (
 		<div className="w3-container">
-			<ChessBoard />
+			<h1>AnonChess</h1>
 		</div>
 	);
 }
 
-export default App;
+export default Home;
