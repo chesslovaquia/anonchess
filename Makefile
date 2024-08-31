@@ -15,6 +15,7 @@ all:
 .PHONY: clean
 clean:
 	@rm -vrf static/pkg static/ui publish
+	@rm -vf ui/wasm_exec.js
 
 .PHONY: distclean
 distclean: clean
@@ -34,9 +35,10 @@ build-js:
 
 .PHONY: build-go
 build-go:
+	@rm -f ui/wasm_exec.js
+	@install -v -m 0640 -t ui "`go env GOROOT`/misc/wasm/wasm_exec.js"
 	@rm -rf static/pkg
 	@install -m 0750 -d static/pkg
-	@install -v -m 0640 -t static/pkg "`go env GOROOT`/misc/wasm/wasm_exec.js"
 	go build -o static/pkg/anonchess.wasm
 
 .PHONY: build
@@ -68,7 +70,6 @@ publish:
 	@install -v -m 0644 -t ./publish/css ./static/css/*.css
 
 	@install -m 0755 -d ./publish/pkg
-	@install -v -m 0644 -t ./publish/pkg ./static/pkg/wasm_exec.js
 	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess.wasm
 
 	@install -m 0755 -d ./publish/ui
