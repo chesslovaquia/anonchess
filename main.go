@@ -8,6 +8,6 @@ import (
 )
 
 func main() {
-	fmt.Println("wasm-check loaded")
+	fmt.Println("anonchess.wasm main")
 	select {}
 }
