@@ -48,15 +48,15 @@ build-go:
 	@$(MAKE) home-go
 	@$(MAKE) play-go
 
-.PHONY: build
-build: build-go build-js html
-
-#
-# HTML
-#
 .PHONY: html
 html:
 	go run ./tpl
+
+.PHONY: ui
+ui: build-js html
+
+.PHONY: build
+build: build-go ui
 
 #
 # Home
@@ -99,7 +99,6 @@ test:
 #
 .PHONY: release
 release:
-	@rm -rf static/pkg static/ui
 	@$(MAKE) build WEBPACK_FLAGS='--mode production'
 
 #
