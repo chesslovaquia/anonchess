@@ -58,7 +58,7 @@ home-js:
 
 .PHONY: home-go
 home-go:
-	go build -o static/pkg/anonchess-home.wasm ./wasm/home
+	wasm/build.sh -o static/pkg/anonchess-home.wasm ./wasm/home
 
 .PHONY: home
 home: home-go home-js
@@ -72,7 +72,7 @@ play-js:
 
 .PHONY: play-go
 play-go:
-	go build -o static/pkg/anonchess-play.wasm ./wasm/play
+	wasm/build.sh -o static/pkg/anonchess-play.wasm ./wasm/play
 
 .PHONY: play
 play: play-go play-js
@@ -82,7 +82,7 @@ play: play-go play-js
 #
 .PHONY: test
 test:
-	@go test -exec="`go env GOROOT`/misc/wasm/go_js_wasm_exec"
+	wasm/test.sh -exec="`go env GOROOT`/misc/wasm/go_js_wasm_exec"
 
 #
 # release
