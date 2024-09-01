@@ -1,3 +1,4 @@
+MAKEFLAGS += --no-print-directory
 WEBPACK_FLAGS ?= --mode development
 
 .PHONY: default
