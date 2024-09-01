@@ -6,10 +6,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/notnil/chess"
+	"chesslovaquia/anonchess/lib/game"
 )
 
 func main() {
-	game := chess.NewGame()
-	fmt.Println(game.Position().Board().Draw())
+	fmt.Println("Position:", game.Position())
+	fmt.Println("   Board:", game.Board())
+	fmt.Println(game.BoardDraw())
 }
