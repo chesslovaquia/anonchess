@@ -52,7 +52,7 @@ RUN go version
 
 WORKDIR /home/devel/anonchess
 
-RUN go get github.com/notnil/chess
+RUN go mod download -x
 
 WORKDIR /home/devel
 
