@@ -10,6 +10,6 @@ import (
 
 func main() {
 	// main loop
-	fmt.Println("anonchess.wasm:", runtime.Version())
+	fmt.Println("anonchess-home.wasm:", runtime.Version())
 	select {}
 }

@@ -58,7 +58,7 @@ home-js:
 
 .PHONY: home-go
 home-go:
-	go build -o static/pkg/anonchess.wasm
+	go build -o static/pkg/anonchess-home.wasm ./wasm/home
 
 .PHONY: home
 home: home-go home-js
@@ -72,7 +72,7 @@ play-js:
 
 .PHONY: play-go
 play-go:
-	go build -o static/pkg/anonchess-play.wasm ./cmd/play
+	go build -o static/pkg/anonchess-play.wasm ./wasm/play
 
 .PHONY: play
 play: play-go play-js
@@ -110,7 +110,7 @@ publish:
 	@install -m 0755 -d ./publish/css
 	@install -v -m 0644 -t ./publish/css ./static/css/*.css
 #	Home
-	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess.wasm
+	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess-home.wasm
 	@install -v -m 0644 -t ./publish ./static/*.html
 	@install -m 0755 -d ./publish/ui/home
 	@install -v -m 0644 -t ./publish/ui/home ./static/ui/home/main.js
