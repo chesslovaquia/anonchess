@@ -47,7 +47,14 @@ build-go:
 	@$(MAKE) play-go
 
 .PHONY: build
-build: build-go build-js
+build: build-go build-js html
+
+#
+# HTML
+#
+.PHONY: html
+html:
+	go run ./tpl
 
 #
 # Home
