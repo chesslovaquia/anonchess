@@ -103,7 +103,7 @@ publish:
 	@install -m 0755 -d ./publish/pkg
 	@install -m 0755 -d ./publish/ui
 #	vendor
-	@./vendor-publish.sh
+	@./static/vendor-publish.sh
 	@install -m 0755 -d ./publish/w3css
 	@install -m 0755 -d ./publish/w3css/4
 	@install -v -m 0644 -t ./publish/w3css/4 ./static/w3css/4/w3.css
