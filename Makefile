@@ -82,7 +82,7 @@ play: play-go play-js
 #
 .PHONY: test
 test:
-	wasm/test.sh -exec="`go env GOROOT`/misc/wasm/go_js_wasm_exec" ./...
+	wasm/test.sh ./...
 
 #
 # release

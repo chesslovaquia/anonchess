@@ -4,6 +4,8 @@
 package game
 
 import (
+	"unicode"
+
 	"github.com/notnil/chess"
 )
 
@@ -23,4 +25,26 @@ func Board() string {
 
 func BoardDraw() string {
 	return g.Position().Board().Draw()
+}
+
+func BoardMap() []any {
+	var m []any
+	var row string
+	for _, square := range Board() {
+		if unicode.IsDigit(square) {
+			count := int(square - '0')
+			for i := 0; i < count; i++ {
+				row += " "
+			}
+			continue
+		}
+		if square == '/' {
+			m = append(m, row)
+			row = ""
+			continue
+		}
+		row += string(square)
+	}
+	m = append(m, row)
+	return m
 }
