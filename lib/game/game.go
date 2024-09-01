@@ -15,6 +15,16 @@ func init() {
 	g = chess.NewGame()
 }
 
+func New(fen string) error {
+	g = nil
+	s, err := chess.FEN(fen)
+	if err != nil {
+		return err
+	}
+	g = chess.NewGame(s)
+	return nil
+}
+
 func Position() string {
 	return g.Position().String()
 }
