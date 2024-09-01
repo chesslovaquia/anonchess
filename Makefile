@@ -121,7 +121,7 @@ publish:
 	@install -v -m 0644 -t ./publish/css ./static/css/*.css
 #	Home
 	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess-home.wasm
-	@install -v -m 0644 -t ./publish ./static/*.html
+	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.js
 	@install -m 0755 -d ./publish/ui/home
 	@install -v -m 0644 -t ./publish/ui/home ./static/ui/home/main.js
 #	Play
