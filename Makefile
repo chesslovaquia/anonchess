@@ -14,6 +14,7 @@ all:
 
 .PHONY: clean
 clean:
+	@TPL=clean go run ./tpl
 	@rm -vrf static/pkg static/ui publish docker/build
 	@rm -vf ui/wasm_exec.js
 

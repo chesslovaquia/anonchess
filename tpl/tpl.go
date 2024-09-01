@@ -5,9 +5,28 @@ package main
 
 import (
 	"html/template"
+	"fmt"
 	"log"
 	"os"
 )
+
+func gen() {
+	render("static/index.html", "tpl/home.html", page{
+		Root: ".",
+	})
+	render("static/play/index.html", "tpl/play.html", page{
+		Root: "..",
+	})
+}
+
+var cleanup bool = false
+
+func main() {
+	if os.Getenv("TPL") == "clean" {
+		cleanup = true
+	}
+	gen()
+}
 
 type page struct {
 	Root string
@@ -16,6 +35,17 @@ type page struct {
 var tplbase string = "tpl/base.html"
 
 func render(dst, src string, data page) {
+	if cleanup {
+		if err := os.Remove(dst); err != nil {
+			if !os.IsNotExist(err) {
+				log.Fatal(err)
+			}
+		} else {
+			fmt.Println(dst, "removed")
+		}
+		return
+	}
+
 	t, err := template.ParseFiles(tplbase, src)
 	if err != nil {
 		log.Fatalf("%s - parse error: %v", src, err)
@@ -32,14 +62,5 @@ func render(dst, src string, data page) {
 		log.Fatalf("%v", err)
 	}
 
-	log.Println(dst)
-}
-
-func main() {
-	render("static/index.html", "tpl/home.html", page{
-		Root: ".",
-	})
-	render("static/play/index.html", "tpl/play.html", page{
-		Root: "..",
-	})
+	fmt.Println(dst)
 }
