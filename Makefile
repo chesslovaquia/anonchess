@@ -82,7 +82,8 @@ play: play-go play-js
 #
 .PHONY: test
 test:
-	wasm/test.sh ./...
+	go test . ./cmd/... ./lib/...
+	wasm/test.sh ./wasm/...
 
 #
 # release
