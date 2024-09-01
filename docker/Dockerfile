@@ -36,6 +36,10 @@ RUN groupadd -o -g ${DEVEL_GID} devel \
 RUN printf 'umask %s\n' '027' >>/home/devel/.profile
 RUN printf "export PS1='%s '\n" '\u@\h:\W\$' >>/home/devel/.profile
 
+RUN install -v -d -m 0750 -o devel -g devel /home/devel/anonchess
+COPY build/go.mod /home/devel/anonchess
+COPY build/go.sum /home/devel/anonchess
+
 USER devel:devel
 WORKDIR /home/devel
 
@@ -43,10 +47,13 @@ ENV USER devel
 ENV HOME /home/devel
 
 ENV GOPATH /home/devel/go
-ENV GOOS   js
-ENV GOARCH wasm
 
 RUN go version
-RUN go env -w GOOS=js GOARCH=wasm
+
+WORKDIR /home/devel/anonchess
+
+RUN go get github.com/notnil/chess
+
+WORKDIR /home/devel
 
 CMD /bin/bash -i -l

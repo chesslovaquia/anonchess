@@ -5,7 +5,7 @@ default: build
 
 .PHONY: all
 all:
-	@echo "GOOS=`go env GOOS` GOARCH=`go env GOARCH`"
+	@echo "AnonChess build"
 	@echo "  `go version`"
 	@echo "  nodejs `node --version`"
 	@echo "  npm `npm --version`"
@@ -14,7 +14,7 @@ all:
 
 .PHONY: clean
 clean:
-	@rm -vrf static/pkg static/ui publish
+	@rm -vrf static/pkg static/ui publish docker/build
 	@rm -vf ui/wasm_exec.js
 
 .PHONY: distclean
@@ -22,7 +22,7 @@ distclean: clean
 	@rm -vrf node_modules
 
 .PHONY: docker
-docker: distclean
+docker:
 	@docker/build.sh
 
 #
