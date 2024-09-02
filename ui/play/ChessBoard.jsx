@@ -16,11 +16,16 @@ function ChessBoard() {
 
 	const board = anonc_board();
 
-	const pieceToFile = {
+	const pieceImage = {
 		'r': 'bR.svg', 'n': 'bN.svg', 'b': 'bB.svg',
 		'q': 'bQ.svg', 'k': 'bK.svg', 'p': 'bP.svg',
 		'R': 'wR.svg', 'N': 'wN.svg', 'B': 'wB.svg',
 		'Q': 'wQ.svg', 'K': 'wK.svg', 'P': 'wP.svg',
+	};
+
+	const pieceAlt = {
+		'r': '♜', 'n': '♞', 'b': '♝', 'q': '♛', 'k': '♚', 'p': '♟',
+		'R': '♖', 'N': '♘', 'B': '♗', 'Q': '♕', 'K': '♔', 'P': '♙',
 	};
 
 	const files = 'abcdefgh';
@@ -44,8 +49,8 @@ function ChessBoard() {
 							<img
 								data-kind="piece"
 								data-square={sq(colIndex, rowIndex)}
-								src={`../lila/public/piece/cburnett/${pieceToFile[square]}`}
-								alt=""
+								src={`../lila/public/piece/cburnett/${pieceImage[square]}`}
+								alt={`${pieceAlt[square]}`}
 								className="chess-piece"
 							/>
 						)}
