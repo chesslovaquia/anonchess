@@ -65,6 +65,12 @@ function ChessBoard() {
 		//~ console.log(t.dataset.kind, t.dataset.square);
 		if (t.dataset.kind === 'piece') {
 			piece = t;
+		} else if (t.dataset.kind === 'square') {
+			if (piece) {
+				const move = `${piece.dataset.square}${t.dataset.square}`;
+				console.log('move:', move, '???');
+				piece = null;
+			}
 		}
 	};
 
