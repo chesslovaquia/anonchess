@@ -85,3 +85,11 @@ func Dump() string {
 func Load(s string) error {
 	return New(s)
 }
+
+func Status() string {
+	s := g.Position().Status()
+	if s == chess.NoMethod {
+		return "Playing"
+	}
+	return s.String()
+}
