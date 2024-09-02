@@ -51,23 +51,28 @@ function ChessBoard() {
 		));
 	};
 
+	const highlight = '2px solid yellow';
+
 	let square = null;
 	let piece = null;
 
 	const handleClick = (event) => {
 		const t = event.target;
 		console.log(t.id, t);
-		//~ console.log(t.attributes);
-		//~ console.log(t.tagName);
-		//~ console.log(t.className);
-		//~ console.log(t.textContent);
-		//~ console.log(t.innerHTML);
-		//~ console.log(t.dataset.kind, t.dataset.square);
 		if (t.dataset.kind === 'piece') {
+			if (square) {
+				square.style.border = '';
+			}
+			square = document.getElementById(`square-${t.dataset.square}`);
+			square.style.border = highlight;
 			piece = t;
 		} else if (t.dataset.kind === 'square') {
+			if (square) {
+				square.style.border = '';
+			}
 			if (piece) {
 				const move = `${piece.dataset.square}${t.dataset.square}`;
+				square.style.border = highlight;
 				console.log('move:', move, '???');
 				piece = null;
 			}
