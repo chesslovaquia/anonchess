@@ -17,7 +17,7 @@ func main() {
 	// anonc_board
 	//
 	anonc_board := js.FuncOf(func(this js.Value, args []js.Value) any {
-		fmt.Println("anonc_board")
+		fmt.Println("anonc_board:", game.Board())
 		return game.BoardMap()
 	})
 	defer anonc_board.Release()
