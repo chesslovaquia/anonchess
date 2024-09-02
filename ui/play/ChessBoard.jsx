@@ -4,12 +4,19 @@
 import React from 'react';
 
 function handleMove(piece, sq1, sq2, move) {
-	piece.style.top = `${sq2.offsetTop}px`;
-	piece.style.left = `${sq2.offsetLeft}px`;
-	piece.dataset.square = sq2.dataset.square;
-	sq1.innerHTML = '';
-	sq2.innerHTML = '';
-	sq2.appendChild(piece);
+	console.log('handleMove:', move);
+	if (anonc_valid_move(move)) {
+		piece.style.top = `${sq2.offsetTop}px`;
+		piece.style.left = `${sq2.offsetLeft}px`;
+		piece.dataset.square = sq2.dataset.square;
+		sq1.innerHTML = '';
+		sq2.innerHTML = '';
+		sq2.appendChild(piece);
+		console.log('handleMove:', move, 'done');
+	} else {
+		console.log('handleMove:', move, 'invalid');
+		sq2.style.border = '2px solid red';
+	}
 }
 
 function ChessBoard() {
@@ -88,8 +95,7 @@ function ChessBoard() {
 				const move = `${piece.dataset.square}${t.dataset.square}`;
 				sq2 = t;
 				sq2.style.border = highlight;
-				console.log('move:', move, '???');
-				handleMove(piece, sq1, sq2, move)
+				handleMove(piece, sq1, sq2, move);
 				piece = null;
 			} else {
 				if (sq1 && sq1 !== sq2) {

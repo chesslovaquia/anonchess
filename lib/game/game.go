@@ -58,3 +58,11 @@ func BoardMap() []any {
 	m = append(m, row)
 	return m
 }
+
+func ValidMoves() []string {
+	vm := make([]string, 0)
+	for _, m := range g.ValidMoves() {
+		vm = append(vm, m.String())
+	}
+	return vm
+}
