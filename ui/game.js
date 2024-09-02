@@ -1,11 +1,33 @@
 import React from 'react';
 
 //
+// saveGame
+//
+function saveGame() {
+	sessionStorage.setItem('anonc_game', anonc_game_dump());
+}
+
+//
+// loadGame
+//
+function loadGame() {
+	const g = sessionStorage.getItem('anonc_game');
+	if (g) {
+		return anonc_game_load(g);
+	}
+	return null
+}
+
+//
 // renderBoard
 //
 export function renderBoard() {
 	console.log('renderBoard:', anonc_board());
-	const board = anonc_board_map();
+
+	let board = loadGame();
+	if (!board) {
+		board = anonc_board_map();
+	}
 
 	const pieceImage = {
 		'r': 'bR.svg', 'n': 'bN.svg', 'b': 'bB.svg',
@@ -56,6 +78,7 @@ export function handleMove(piece, sq1, sq2, move) {
 	console.log('handleMove:', move);
 	if (anonc_valid_move(move)) {
 		if (anonc_move(move)) {
+			saveGame();
 			piece.style.top = `${sq2.offsetTop}px`;
 			piece.style.left = `${sq2.offsetLeft}px`;
 			piece.dataset.square = sq2.dataset.square;

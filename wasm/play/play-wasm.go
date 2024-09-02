@@ -72,6 +72,34 @@ func main() {
 	js.Global().Set("anonc_move", anonc_move)
 
 	//
+	// anonc_game_dump
+	//
+	anonc_game_dump := js.FuncOf(func(this js.Value, args []js.Value) any {
+		return game.Dump()
+	})
+	defer anonc_game_dump.Release()
+	js.Global().Set("anonc_game_dump", anonc_game_dump)
+
+	//
+	// anonc_game_load
+	//
+	anonc_game_load := js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 1 {
+			fmt.Println("anonc_game_load: no args")
+			return nil
+		}
+		g := strings.TrimSpace(args[0].String())
+		fmt.Println("anonc_game_load:", len(g))
+		if err := game.Load(g); err != nil {
+			fmt.Println("[ERROR] anonc_game_load:", err)
+			return nil
+		}
+		return game.BoardMap()
+	})
+	defer anonc_game_load.Release()
+	js.Global().Set("anonc_game_load", anonc_game_load)
+
+	//
 	// main loop
 	//
 	fmt.Println("anonchess-play.wasm:", runtime.Version())

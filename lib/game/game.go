@@ -77,3 +77,11 @@ func Move(m string) error {
 	}
 	return g.Move(move)
 }
+
+func Dump() string {
+	return g.Position().String()
+}
+
+func Load(s string) error {
+	return New(s)
+}
