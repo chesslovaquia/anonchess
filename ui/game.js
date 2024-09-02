@@ -4,7 +4,7 @@ import React from 'react';
 // renderBoard
 //
 export function renderBoard() {
-	const board = anonc_board();
+	const board = anonc_board_map();
 
 	const pieceImage = {
 		'r': 'bR.svg', 'n': 'bN.svg', 'b': 'bB.svg',

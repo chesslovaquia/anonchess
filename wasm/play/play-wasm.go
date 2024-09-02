@@ -14,14 +14,14 @@ import (
 
 func main() {
 	//
-	// anonc_board
+	// anonc_board_map
 	//
-	anonc_board := js.FuncOf(func(this js.Value, args []js.Value) any {
-		fmt.Println("anonc_board:", game.Board())
+	anonc_board_map := js.FuncOf(func(this js.Value, args []js.Value) any {
+		fmt.Println("anonc_board_map:", game.Board())
 		return game.BoardMap()
 	})
-	defer anonc_board.Release()
-	js.Global().Set("anonc_board", anonc_board)
+	defer anonc_board_map.Release()
+	js.Global().Set("anonc_board_map", anonc_board_map)
 
 	//
 	// anonc_valid_move
