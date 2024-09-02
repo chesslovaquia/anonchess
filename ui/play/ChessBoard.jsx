@@ -3,6 +3,15 @@
 
 import React from 'react';
 
+function handleMove(piece, sq1, sq2, move) {
+	piece.style.top = `${sq2.offsetTop}px`;
+	piece.style.left = `${sq2.offsetLeft}px`;
+	piece.dataset.square = sq2.dataset.square;
+	sq1.innerHTML = '';
+	sq2.innerHTML = '';
+	sq2.appendChild(piece);
+}
+
 function ChessBoard() {
 
 	const board = anonc_board();
@@ -25,10 +34,6 @@ function ChessBoard() {
 		return `square-${files[file]}${ranks[7 - rank]}`;
 	};
 
-	const pid = (file, rank) => {
-		return `piece-${files[file]}${ranks[7 - rank]}`;
-	};
-
 	const renderBoard = () => {
 		const squareName = "";
 		return board.map((row, rowIndex) => (
@@ -37,7 +42,6 @@ function ChessBoard() {
 					<div className="chess-square" key={colIndex} id={sqid(colIndex, rowIndex)} data-square={sq(colIndex, rowIndex)} data-kind="square">
 						{square !== ' ' && (
 							<img
-								id={pid(colIndex, rowIndex)}
 								data-kind="piece"
 								data-square={sq(colIndex, rowIndex)}
 								src={`../lila/public/piece/cburnett/${pieceToFile[square]}`}
@@ -59,7 +63,8 @@ function ChessBoard() {
 
 	const handleClick = (event) => {
 		const t = event.target;
-		console.log(t.id, t);
+		console.log('handle click');
+		console.log(t.dataset.kind, t.dataset.square, t);
 		if (t.dataset.kind === 'piece') {
 			if (sq1) {
 				sq1.style.border = '';
@@ -71,7 +76,7 @@ function ChessBoard() {
 			sq1.style.border = highlight;
 			piece = t;
 		} else if (t.dataset.kind === 'square') {
-			if (sq2) {
+			if (sq2 && sq2 !== sq1) {
 				sq2.style.border = '';
 			}
 			if (piece) {
@@ -79,12 +84,22 @@ function ChessBoard() {
 				sq2 = t;
 				sq2.style.border = highlight;
 				console.log('move:', move, '???');
+				handleMove(piece, sq1, sq2, move)
 				piece = null;
 			} else {
-				if (sq1) {
+				if (sq1 && sq1 !== sq2) {
 					sq1.style.border = '';
 				}
 			}
+		}
+		if (piece) {
+			console.log('piece:', piece.dataset.square);
+		}
+		if (sq1) {
+			console.log('sq1:', sq1.dataset.square);
+		}
+		if (sq2) {
+			console.log('sq2:', sq2.dataset.square);
 		}
 	};
 
