@@ -14,6 +14,15 @@ import (
 
 func main() {
 	//
+	// anonc_board
+	//
+	anonc_board := js.FuncOf(func(this js.Value, args []js.Value) any {
+		return game.Board()
+	})
+	defer anonc_board.Release()
+	js.Global().Set("anonc_board", anonc_board)
+
+	//
 	// anonc_board_map
 	//
 	anonc_board_map := js.FuncOf(func(this js.Value, args []js.Value) any {
@@ -42,6 +51,25 @@ func main() {
 	})
 	defer anonc_valid_move.Release()
 	js.Global().Set("anonc_valid_move", anonc_valid_move)
+
+	//
+	// anonc_move
+	//
+	anonc_move := js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 1 {
+			fmt.Println("anonc_move: no args")
+			return false
+		}
+		m := strings.TrimSpace(args[0].String())
+		fmt.Println("anonc_move:", m)
+		if err := game.Move(m); err != nil {
+			fmt.Println("[ERROR] anonc_move:", err)
+			return false
+		}
+		return true
+	})
+	defer anonc_move.Release()
+	js.Global().Set("anonc_move", anonc_move)
 
 	//
 	// main loop

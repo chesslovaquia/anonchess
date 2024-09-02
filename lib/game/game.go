@@ -4,6 +4,7 @@
 package game
 
 import (
+	"fmt"
 	"unicode"
 
 	"github.com/notnil/chess"
@@ -65,4 +66,14 @@ func ValidMoves() []string {
 		vm = append(vm, m.String())
 	}
 	return vm
+}
+
+func Move(m string) error {
+	move, err := chess.UCINotation{}.Decode(g.Position(), m)
+	if err != nil {
+		return err
+	} else {
+		fmt.Println("move:", move)
+	}
+	return g.Move(move)
 }
