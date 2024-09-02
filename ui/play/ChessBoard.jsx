@@ -53,30 +53,37 @@ function ChessBoard() {
 
 	const highlight = '2px solid yellow';
 
-	let square = null;
+	let sq1 = null;
+	let sq2 = null;
 	let piece = null;
 
 	const handleClick = (event) => {
 		const t = event.target;
 		console.log(t.id, t);
 		if (t.dataset.kind === 'piece') {
-			if (square) {
-				square.style.border = '';
+			if (sq1) {
+				sq1.style.border = '';
 			}
-			square = document.getElementById(`square-${t.dataset.square}`);
-			square.style.border = highlight;
+			if (sq2) {
+				sq2.style.border = '';
+			}
+			sq1 = document.getElementById(`square-${t.dataset.square}`);
+			sq1.style.border = highlight;
 			piece = t;
 		} else if (t.dataset.kind === 'square') {
-			if (square) {
-				square.style.border = '';
+			if (sq2) {
+				sq2.style.border = '';
 			}
 			if (piece) {
 				const move = `${piece.dataset.square}${t.dataset.square}`;
-				square.style.border = highlight;
+				sq2 = t;
+				sq2.style.border = highlight;
 				console.log('move:', move, '???');
 				piece = null;
 			} else {
-				square = null;
+				if (sq1) {
+					sq1.style.border = '';
+				}
 			}
 		}
 	};
