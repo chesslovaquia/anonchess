@@ -50,7 +50,7 @@ build-go:
 
 .PHONY: html
 html:
-	go run ./tpl
+	TPL=gen go run ./tpl
 
 .PHONY: ui
 ui: build-js html

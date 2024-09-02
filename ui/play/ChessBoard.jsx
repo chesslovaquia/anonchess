@@ -17,15 +17,29 @@ function ChessBoard() {
 	const files = 'abcdefgh';
 	const ranks = '12345678';
 
+	const sq = (file, rank) => {
+		return `${files[file]}${ranks[7 - rank]}`;
+	};
+
+	const sqid = (file, rank) => {
+		return `square-${files[file]}${ranks[7 - rank]}`;
+	};
+
+	const pid = (file, rank) => {
+		return `piece-${files[file]}${ranks[7 - rank]}`;
+	};
+
 	const renderBoard = () => {
 		const squareName = "";
 		return board.map((row, rowIndex) => (
 			<div className="chess-row" key={rowIndex}>
 				{row.split('').map((square, colIndex) => (
-					<div className="chess-square" key={colIndex} data-square={`${files[colIndex]}${ranks[7 - rowIndex]}`}>
+					<div className="chess-square" key={colIndex} id={sqid(colIndex, rowIndex)} data-square={sq(colIndex, rowIndex)} data-kind="square">
 						{square !== ' ' && (
 							<img
-								data-square={`${files[colIndex]}${ranks[7 - rowIndex]}`}
+								id={pid(colIndex, rowIndex)}
+								data-kind="piece"
+								data-square={sq(colIndex, rowIndex)}
 								src={`../lila/public/piece/cburnett/${pieceToFile[square]}`}
 								alt=""
 								className="chess-piece"
@@ -42,11 +56,11 @@ function ChessBoard() {
 		//~ console.log(square);
 		//~ console.log(square.attributes);
 		//~ console.log(square.tagName);
-		//~ console.log(square.id);
 		//~ console.log(square.className);
 		//~ console.log(square.textContent);
 		//~ console.log(square.innerHTML);
-		console.log(square.dataset.square);
+		console.log(square.id);
+		console.log(square.dataset.kind, square.dataset.square);
 	};
 
 	return (
