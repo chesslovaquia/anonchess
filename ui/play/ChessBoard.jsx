@@ -75,6 +75,8 @@ function ChessBoard() {
 				square.style.border = highlight;
 				console.log('move:', move, '???');
 				piece = null;
+			} else {
+				square = null;
 			}
 		}
 	};
