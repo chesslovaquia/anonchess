@@ -100,6 +100,15 @@ func main() {
 	js.Global().Set("anonc_game_load", anonc_game_load)
 
 	//
+	// anonc_status
+	//
+	anonc_status := js.FuncOf(func(this js.Value, args []js.Value) any {
+		return game.Status()
+	})
+	defer anonc_status.Release()
+	js.Global().Set("anonc_status", anonc_status)
+
+	//
 	// main loop
 	//
 	fmt.Println("anonchess-play.wasm:", runtime.Version())
