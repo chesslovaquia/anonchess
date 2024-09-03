@@ -3,11 +3,10 @@
 
 import React from 'react';
 
-function SideBar() {
+export function sidebar(color) {
 	return (
-		<div className="w3-large w3-wide">
-			<p>{anonc_status()}</p>
+		<div className="w3-wide">
+			<p>{color}</p>
 		</div>
 	);
 }
-export default SideBar;

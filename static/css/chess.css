@@ -39,7 +39,7 @@
 }
 
 .chess-piece {
-	width: 90%;  /* Adjust this value to fit the pieces on the squares */
+	width: 100%;  /* Adjust this value to fit the pieces on the squares */
 	height: auto;
 	max-width: 100%;
 	max-height: 100%;
