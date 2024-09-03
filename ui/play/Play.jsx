@@ -9,11 +9,14 @@ import SideBar    from './SideBar';
 function Play() {
 	return (
 		<div>
-			<div className="w3-sidebar w3-bar-block w3-black" style={{width: '25%'}}>
+			<div className="w3-container w3-cell w3-mobile">
 				<SideBar />
 			</div>
-			<div style={{marginLeft: '30%'}}>
+			<div className="w3-container w3-cell w3-mobile">
 				<ChessBoard />
+			</div>
+			<div className="w3-container w3-cell w3-mobile">
+				<SideBar />
 			</div>
 		</div>
 	);

@@ -5,7 +5,7 @@ import React from 'react';
 
 function SideBar() {
 	return (
-		<div className="w3-large">
+		<div className="w3-large w3-wide">
 			<p>{anonc_status()}</p>
 		</div>
 	);
