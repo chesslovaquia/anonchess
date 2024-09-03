@@ -8,14 +8,12 @@ import SideBar    from './SideBar';
 
 function Play() {
 	return (
-		<div className="w3-container w3-left-align">
-			<div className="w3-row">
-				<div className="w3-col w3-left s3 m2 l1 w3-mobile">
-					<SideBar />
-				</div>
-				<div className="w3-col w3-right s9 m10 l11">
-					<ChessBoard />
-				</div>
+		<div>
+			<div className="w3-sidebar w3-bar-block w3-black" style={{width: '25%'}}>
+				<SideBar />
+			</div>
+			<div style={{marginLeft: '30%'}}>
+				<ChessBoard />
 			</div>
 		</div>
 	);
