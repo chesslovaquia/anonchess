@@ -5,7 +5,7 @@ import React from 'react';
 
 export function sidebar(color) {
 	return (
-		<div className="w3-wide">
+		<div className="w3-wide w3-padding">
 			<p>{color}</p>
 		</div>
 	);

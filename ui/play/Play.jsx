@@ -10,13 +10,13 @@ import SideBlack  from './SideBlack';
 function Play() {
 	return (
 		<div>
-			<div className="w3-container w3-cell w3-mobile">
+			<div className="w3-cell w3-cell-top w3-mobile">
 				<SideWhite />
 			</div>
-			<div className="w3-container w3-cell w3-mobile">
+			<div className="w3-cell w3-cell-middle w3-mobile">
 				<ChessBoard />
 			</div>
-			<div className="w3-container w3-cell w3-mobile">
+			<div className="w3-cell w3-cell-top w3-mobile">
 				<SideBlack />
 			</div>
 		</div>
