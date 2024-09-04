@@ -3,11 +3,11 @@
 
 import React from 'react';
 
-function SideBlack() {
+function SideWhite() {
 	return (
-		<ul className="w3-ul w3-dark-gray">
-			<li><b>Black</b></li>
+		<ul className="w3-ul w3-gray">
+			<li>{anonc_outcome()}</li>
 		</ul>
 	);
 }
-export default SideBlack;
+export default SideWhite;

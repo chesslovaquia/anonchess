@@ -6,6 +6,7 @@ import React from 'react';
 import ChessBoard from './ChessBoard';
 import SideWhite  from './SideWhite';
 import SideBlack  from './SideBlack';
+import SideBar    from './SideBar';
 
 function Play() {
 	return (
@@ -18,6 +19,9 @@ function Play() {
 			</div>
 			<div className="w3-cell w3-cell-top w3-mobile">
 				<SideWhite />
+			</div>
+			<div className="w3-cell w3-cell-top w3-mobile">
+				<SideBar />
 			</div>
 		</div>
 	);
