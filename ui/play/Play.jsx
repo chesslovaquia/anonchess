@@ -12,6 +12,9 @@ function Play() {
 	return (
 		<div>
 			<div className="w3-cell w3-cell-top w3-mobile">
+				<SideBar />
+			</div>
+			<div className="w3-cell w3-cell-top w3-mobile">
 				<SideBlack />
 			</div>
 			<div className="w3-cell w3-cell-middle w3-mobile">
@@ -19,9 +22,6 @@ function Play() {
 			</div>
 			<div className="w3-cell w3-cell-top w3-mobile">
 				<SideWhite />
-			</div>
-			<div className="w3-cell w3-cell-top w3-mobile">
-				<SideBar />
 			</div>
 		</div>
 	);
