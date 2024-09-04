@@ -1,5 +1,10 @@
 {{ define "title" }}Play{{ end }}
 
+{{ define "css" }}
+<link rel="stylesheet" href="{{ .Root }}/css/chess.css">
+{{ end }}
+
+
 {{ define "content" }}
 <div id="root" class="w3-container"></div>
 <script src="{{ .Root }}/ui/play/main.js"></script>
