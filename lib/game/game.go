@@ -97,3 +97,11 @@ func Status() string {
 func Outcome() string {
 	return g.Outcome().String()
 }
+
+func Turn() string {
+	return g.Position().Turn().String()
+}
+
+func TurnName() string {
+	return g.Position().Turn().Name()
+}

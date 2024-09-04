@@ -118,6 +118,24 @@ func main() {
 	js.Global().Set("anonc_outcome", anonc_outcome)
 
 	//
+	// anonc_turn
+	//
+	anonc_turn := js.FuncOf(func(this js.Value, args []js.Value) any {
+		return game.Turn()
+	})
+	defer anonc_turn.Release()
+	js.Global().Set("anonc_turn", anonc_turn)
+
+	//
+	// anonc_turn_name
+	//
+	anonc_turn_name := js.FuncOf(func(this js.Value, args []js.Value) any {
+		return game.TurnName()
+	})
+	defer anonc_turn_name.Release()
+	js.Global().Set("anonc_turn_name", anonc_turn_name)
+
+	//
 	// main loop
 	//
 	fmt.Println("anonchess-play.wasm:", runtime.Version())
