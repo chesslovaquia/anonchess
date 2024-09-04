@@ -5,7 +5,7 @@ import React from 'react';
 
 import { renderBoard, handleMove } from '../game.js';
 
-function ChessBoard() {
+function ChessBoard({renderReg}) {
 	const highlight = '2px solid yellow';
 
 	let sq1 = null;
@@ -34,7 +34,7 @@ function ChessBoard() {
 				const move = `${piece.dataset.square}${t.dataset.square}`;
 				sq2 = t;
 				sq2.style.border = highlight;
-				handleMove(piece, sq1, sq2, move);
+				handleMove(renderReg, piece, sq1, sq2, move);
 				piece = null;
 			} else {
 				if (sq1 && sq1 !== sq2) {
@@ -57,7 +57,7 @@ function ChessBoard() {
 		<div id="chessboard" className="chessboard-container" onClick={handleClick}>
 			<img src="../lila/public/images/board/wood4.jpg" alt="Chessboard" className="chessboard-image" />
 			<div className="pieces-overlay">
-				{renderBoard()}
+				{renderBoard(renderReg)}
 			</div>
 		</div>
 	);

@@ -21,7 +21,7 @@ function loadGame() {
 //
 // renderBoard
 //
-export function renderBoard() {
+export function renderBoard(renderReg) {
 	console.log('renderBoard:', anonc_board());
 
 	let board = loadGame();
@@ -74,7 +74,7 @@ export function renderBoard() {
 //
 // handleMove
 //
-export function handleMove(piece, sq1, sq2, move) {
+export function handleMove(renderReg, piece, sq1, sq2, move) {
 	console.log('handleMove:', move);
 	if (anonc_valid_move(move)) {
 		if (anonc_move(move)) {
@@ -86,8 +86,7 @@ export function handleMove(piece, sq1, sq2, move) {
 			sq2.innerHTML = '';
 			sq2.appendChild(piece);
 			console.log('handleMove:', move, 'done');
-			//~ const board = document.getElementById('chessboard');
-			//~ board.style.border = '3px solid green';
+			renderMove(renderReg);
 		} else {
 			console.log('handleMove:', move, 'failed');
 		}
@@ -96,4 +95,11 @@ export function handleMove(piece, sq1, sq2, move) {
 		sq2.style.border = '2px solid red';
 	}
 	console.log('handleMove: board', anonc_board());
+}
+
+//
+// renderMove
+//
+function renderMove(renderReg) {
+	renderReg.current.sideBar();
 }

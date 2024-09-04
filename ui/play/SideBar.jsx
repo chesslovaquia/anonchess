@@ -1,13 +1,23 @@
 // Copyright Jeremías Casteglione <jrmsdev@gmail.com>
 // See LICENSE file.
 
-import React from 'react';
+import React, { useState } from 'react';
 
-function SideWhite() {
+function SideBar({renderReg}) {
+	const [outcome, setOutcome] = useState(anonc_outcome());
+	const [turn, setTurn] = useState(anonc_turn());
+	const [turnName, setTurnName] = useState(anonc_turn_name());
+
+	renderReg.current.sideBar = () => {
+		setOutcome(anonc_outcome());
+		setTurn(anonc_turn());
+		setTurnName(anonc_turn_name());
+	};
+
 	return (
 		<ul className="w3-ul w3-gray">
-			<li>{anonc_outcome()} {anonc_turn()} {anonc_turn_name()}</li>
+			<li>{outcome} {turn}</li>
 		</ul>
 	);
 }
-export default SideWhite;
+export default SideBar;
