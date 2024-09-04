@@ -5,9 +5,9 @@ import React from 'react';
 
 function SideWhite() {
 	return (
-		<div className="w3-wide w3-padding">
-			<p>White</p>
-			<p>{anonc_outcome()}</p>
+		<div className="w3-bar-block w3-dark-gray">
+			<p className="w3-bar-item">White</p>
+			<p className="w3-bar-item">{anonc_outcome()}</p>
 		</div>
 	);
 }

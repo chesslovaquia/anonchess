@@ -9,7 +9,7 @@ import SideBlack  from './SideBlack';
 
 function Play() {
 	return (
-		<div>
+		<div className="w3-container">
 			<div className="w3-cell w3-cell-top w3-mobile">
 				<SideBlack />
 			</div>
