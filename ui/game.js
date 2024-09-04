@@ -86,6 +86,8 @@ export function handleMove(piece, sq1, sq2, move) {
 			sq2.innerHTML = '';
 			sq2.appendChild(piece);
 			console.log('handleMove:', move, 'done');
+			//~ const board = document.getElementById('chessboard');
+			//~ board.style.border = '3px solid green';
 		} else {
 			console.log('handleMove:', move, 'failed');
 		}

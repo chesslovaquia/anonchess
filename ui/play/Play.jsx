@@ -11,13 +11,13 @@ function Play() {
 	return (
 		<div>
 			<div className="w3-cell w3-cell-top w3-mobile">
-				<SideWhite />
+				<SideBlack />
 			</div>
 			<div className="w3-cell w3-cell-middle w3-mobile">
 				<ChessBoard />
 			</div>
 			<div className="w3-cell w3-cell-top w3-mobile">
-				<SideBlack />
+				<SideWhite />
 			</div>
 		</div>
 	);

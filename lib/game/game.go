@@ -93,3 +93,7 @@ func Status() string {
 	}
 	return s.String()
 }
+
+func Outcome() string {
+	return g.Outcome().String()
+}
