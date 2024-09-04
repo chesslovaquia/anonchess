@@ -5,8 +5,8 @@ import React from 'react';
 
 function SideBlack() {
 	return (
-		<div className="w3-bar-block w3-dark-gray">
-			<p className="w3-bar-item">Black</p>
+		<div className="w3-ul w3-dark-gray">
+			<li>Black</li>
 		</div>
 	);
 }
