@@ -3,11 +3,11 @@
 
 import React from 'react';
 
-function SideWhite() {
+function Player2() {
 	return (
 		<ul className="w3-ul w3-dark-gray">
-			<li><b>White</b></li>
+			<li><b>Black</b></li>
 		</ul>
 	);
 }
-export default SideWhite;
+export default Player2;

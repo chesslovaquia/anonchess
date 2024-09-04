@@ -16,7 +16,7 @@ function SideBar({renderReg}) {
 
 	return (
 		<ul className="w3-ul w3-gray">
-			<li>{outcome} {turn}</li>
+			<li>{outcome}</li>
 		</ul>
 	);
 }

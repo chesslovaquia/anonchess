@@ -4,8 +4,8 @@
 import React, { useRef } from 'react';
 
 import ChessBoard from './ChessBoard';
-import SideWhite  from './SideWhite';
-import SideBlack  from './SideBlack';
+import Player1  from './Player1';
+import Player2  from './Player2';
 import SideBar    from './SideBar';
 
 function Play() {
@@ -20,13 +20,13 @@ function Play() {
 				<SideBar renderReg={renderReg} />
 			</div>
 			<div className="w3-cell w3-cell-top w3-mobile">
-				<SideBlack />
+				<Player2 />
 			</div>
 			<div className="w3-cell w3-cell-middle w3-mobile">
 				<ChessBoard renderReg={renderReg} />
 			</div>
 			<div className="w3-cell w3-cell-top w3-mobile">
-				<SideWhite />
+				<Player1 />
 			</div>
 		</div>
 	);

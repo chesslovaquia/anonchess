@@ -1,3 +1,7 @@
+.w3-ul li {
+	border: 0;
+}
+
 .chessboard-container {
 	position: relative;
 	width: 100%;
