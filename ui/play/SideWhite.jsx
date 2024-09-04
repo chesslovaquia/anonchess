@@ -5,10 +5,10 @@ import React from 'react';
 
 function SideWhite() {
 	return (
-		<div className="w3-ul w3-dark-gray">
-			<li>White</li>
+		<ul className="w3-ul w3-center w3-dark-gray">
+			<li><b>White</b></li>
 			<li>{anonc_outcome()}</li>
-		</div>
+		</ul>
 	);
 }
 export default SideWhite;

@@ -5,9 +5,9 @@ import React from 'react';
 
 function SideBlack() {
 	return (
-		<div className="w3-ul w3-dark-gray">
-			<li>Black</li>
-		</div>
+		<ul className="w3-ul w3-center w3-dark-gray">
+			<li><b>Black</b></li>
+		</ul>
 	);
 }
 export default SideBlack;
