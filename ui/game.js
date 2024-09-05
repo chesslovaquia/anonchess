@@ -13,6 +13,8 @@ function saveGame() {
 export function handleMove(renderReg, piece, sq1, sq2, move) {
 	console.log('handleMove:', move);
 	if (anonc_valid_move(move)) {
+		const tag = anonc_move_tag(move);
+		console.log('move tag:', tag);
 		if (anonc_move(move)) {
 			saveGame();
 			piece.style.top = `${sq2.offsetTop}px`;

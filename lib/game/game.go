@@ -90,14 +90,15 @@ func MoveTag(m string) string {
 	if move.HasTag(chess.QueenSideCastle) {
 		return "QueenSideCastle"
 	}
-	if move.HasTag(chess.Capture) {
-		return "Capture"
-	}
 	if move.HasTag(chess.EnPassant) {
 		return "EnPassant"
 	}
 	if move.HasTag(chess.Check) {
 		return "Check"
+	}
+	// check Capture at the end
+	if move.HasTag(chess.Capture) {
+		return "Capture"
 	}
 	return ""
 }
