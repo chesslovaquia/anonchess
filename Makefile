@@ -61,7 +61,7 @@ ui: build-js html
 build: build-go ui
 
 #
-# about
+# About
 #
 .PHONY: about
 about:
