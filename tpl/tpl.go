@@ -25,6 +25,9 @@ func gen() {
 	renderJS("static/loader.js", "tpl/loader.js", js{
 		Root: ".",
 	})
+	render("static/about.html", "tpl/about.html", doc{
+		Root: ".",
+	})
 	render("static/play/index.html", "tpl/play.html", doc{
 		Root: "..",
 	})

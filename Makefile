@@ -36,6 +36,7 @@ build-deps:
 
 .PHONY: build-js
 build-js:
+	@$(MAKE) about
 	@$(MAKE) home-js
 	@$(MAKE) play-js
 
@@ -51,12 +52,20 @@ build-go:
 .PHONY: html
 html:
 	TPL=gen go run ./tpl
+	@install -v -m 0640 -t static ./package.json
 
 .PHONY: ui
 ui: build-js html
 
 .PHONY: build
 build: build-go ui
+
+#
+# about
+#
+.PHONY: about
+about:
+	npx webpack build $(WEBPACK_FLAGS) --entry ./ui/about/index.js -o $(PWD)/static/ui/about
 
 #
 # Home
@@ -118,9 +127,14 @@ publish:
 #	css
 	@install -m 0755 -d ./publish/css
 	@install -v -m 0644 -t ./publish/css ./static/css/*.css
+#	root
+	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.js
+	@install -v -m 0644 -t ./publish ./static/package.json
+#	About
+	@install -m 0755 -d ./publish/ui/about
+	@install -v -m 0644 -t ./publish/ui/about ./static/ui/about/main.js
 #	Home
 	@install -v -m 0644 -t ./publish/pkg ./static/pkg/anonchess-home.wasm
-	@install -v -m 0644 -t ./publish ./static/*.html ./static/*.js
 	@install -m 0755 -d ./publish/ui/home
 	@install -v -m 0644 -t ./publish/ui/home ./static/ui/home/main.js
 #	Play

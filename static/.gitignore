@@ -1,4 +1,8 @@
 /pkg
 /ui
+
 /index.html
 /loader.js
+
+/about.html
+/package.json
