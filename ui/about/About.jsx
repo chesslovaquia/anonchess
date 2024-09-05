@@ -45,11 +45,17 @@ function About() {
 		);
 	}
 
+	console.log('pkg:', data);
 	return (
-		<div className="w3-container">
-			<h1>AnonChess</h1>
-			<h3>{data.version}</h3>
-		</div>
+		<ul className="w3-ul">
+			<li>
+				<a href={data.homepage} target="_blank" rel="noopener noreferrer">
+					<h1>AnonChess</h1>
+				</a>
+			</li>
+			<li><h3>{data.description}</h3></li>
+			<li>version {data.version}</li>
+		</ul>
 	);
 }
 
