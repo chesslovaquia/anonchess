@@ -1,8 +1,9 @@
 # TODO
 
 * Chessboard handle
-	* enroque
-	* comer al paso
+	* castle
+	* en passant
+	* promotions
 
 * Move saved game from session to storage, to even persist if browser is closed by mistake or whatever. Maybe not? So we can have one game per tab?
 
