@@ -6,13 +6,6 @@ import React from 'react';
 import { handleMove } from '../game.js';
 
 //
-// saveGame
-//
-function saveGame() {
-	sessionStorage.setItem('anonc_game', anonc_game_dump());
-}
-
-//
 // loadGame
 //
 function loadGame() {
@@ -81,35 +74,54 @@ function renderBoard(renderReg) {
 //
 function ChessBoard({renderReg}) {
 	const highlight = '2px solid yellow';
+	const highlightTake = '2px solid green';
 
 	let sq1 = null;
 	let sq2 = null;
 	let piece = null;
 
+	const doMove = (target) => {
+		const move = `${piece.dataset.square}${target.dataset.square}`;
+		console.log('doMove:', move);
+		if (target.dataset.kind === 'piece') {
+			sq2 = document.getElementById(`square-${target.dataset.square}`);
+			sq2.style.border = highlightTake;
+		} else {
+			sq2 = target;
+			sq2.style.border = highlight;
+		}
+		handleMove(renderReg, piece, sq1, sq2, move);
+		piece = null;
+	};
+
 	const handleClick = (event) => {
 		const t = event.target;
 		console.log('handle click');
-		console.log(t.dataset.kind, t.dataset.square, t);
+		console.log(t.dataset.kind, t.dataset.square, t.dataset.color, t);
 		if (t.dataset.kind === 'piece') {
-			if (sq1) {
-				sq1.style.border = '';
-			}
 			if (sq2) {
 				sq2.style.border = '';
 			}
-			sq1 = document.getElementById(`square-${t.dataset.square}`);
-			sq1.style.border = highlight;
-			piece = t;
+			if (piece) {
+				// take oponent piece
+				console.log('handle click: take piece');
+				doMove(t);
+			} else {
+				if (sq1) {
+					sq1.style.border = '';
+				}
+				sq1 = document.getElementById(`square-${t.dataset.square}`);
+				sq1.style.border = highlight;
+				piece = t;
+			}
 		} else if (t.dataset.kind === 'square') {
 			if (sq2 && sq2 !== sq1) {
 				sq2.style.border = '';
 			}
 			if (piece) {
-				const move = `${piece.dataset.square}${t.dataset.square}`;
-				sq2 = t;
-				sq2.style.border = highlight;
-				handleMove(renderReg, piece, sq1, sq2, move);
-				piece = null;
+				// move piece
+				console.log('handle click: move piece');
+				doMove(t);
 			} else {
 				if (sq1 && sq1 !== sq2) {
 					sq1.style.border = '';

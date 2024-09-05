@@ -1,6 +1,13 @@
 import React from 'react';
 
 //
+// saveGame
+//
+function saveGame() {
+	sessionStorage.setItem('anonc_game', anonc_game_dump());
+}
+
+//
 // handleMove
 //
 export function handleMove(renderReg, piece, sq1, sq2, move) {
