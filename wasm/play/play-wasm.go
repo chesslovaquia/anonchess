@@ -72,6 +72,21 @@ func main() {
 	js.Global().Set("anonc_move", anonc_move)
 
 	//
+	// anonc_move_tag
+	//
+	anonc_move_tag := js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 1 {
+			fmt.Println("anonc_move_tag: no args")
+			return false
+		}
+		m := strings.TrimSpace(args[0].String())
+		fmt.Println("anonc_move_tag:", m)
+		return game.MoveTag(m)
+	})
+	defer anonc_move_tag.Release()
+	js.Global().Set("anonc_move_tag", anonc_move_tag)
+
+	//
 	// anonc_game_dump
 	//
 	anonc_game_dump := js.FuncOf(func(this js.Value, args []js.Value) any {

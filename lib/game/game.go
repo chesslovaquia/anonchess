@@ -78,6 +78,30 @@ func Move(m string) error {
 	return g.Move(move)
 }
 
+func MoveTag(m string) string {
+	move, err := chess.UCINotation{}.Decode(g.Position(), m)
+	if err != nil {
+		fmt.Printf("ERROR MoveTag: %s - %s\n", m, err)
+		return "error"
+	}
+	if move.HasTag(chess.KingSideCastle) {
+		return "KingSideCastle"
+	}
+	if move.HasTag(chess.QueenSideCastle) {
+		return "QueenSideCastle"
+	}
+	if move.HasTag(chess.Capture) {
+		return "Capture"
+	}
+	if move.HasTag(chess.EnPassant) {
+		return "EnPassant"
+	}
+	if move.HasTag(chess.Check) {
+		return "Check"
+	}
+	return ""
+}
+
 func Dump() string {
 	return g.Position().String()
 }
