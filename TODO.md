@@ -1,5 +1,9 @@
 # TODO
 
-* Move saved game from session to storage, to even persist if browser is closed by mistake or whatever.
+* Chessboard handle
+	* enroque
+	* comer al paso
+
+* Move saved game from session to storage, to even persist if browser is closed by mistake or whatever. Maybe not? So we can have one game per tab?
 
 * Save moves history as well and re-play the game when loading it, to detect checkmate or whatever too.
