@@ -40,4 +40,5 @@ export function handleMove(renderReg, piece, sq1, sq2, move) {
 //
 function renderMove(renderReg) {
 	renderReg.current.sideBar();
+	renderReg.current.chessBoard();
 }
