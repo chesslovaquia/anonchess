@@ -49,4 +49,6 @@ function renderMove(renderReg, move, tag) {
 
 function renderEnPassant(sq) {
 	console.log('renderEnPassant:', sq);
+	const clean_sq = document.getElementById(`square-${sq}`);
+	clean_sq.innerHTML = '';
 }
