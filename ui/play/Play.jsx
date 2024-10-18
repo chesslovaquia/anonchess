@@ -10,8 +10,7 @@ import SideBar    from './SideBar';
 
 function Play() {
 	const renderReg = useRef({
-		sideBar:    () => {},
-		chessBoard: () => {},
+		sideBar: () => {},
 	});
 
 	return (

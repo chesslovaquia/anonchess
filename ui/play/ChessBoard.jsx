@@ -76,7 +76,7 @@ function ChessBoard({renderReg}) {
 	return (
 		<div id="chessboard" className="chessboard-container" onClick={handleClick}>
 			<img src="../lila/public/images/board/wood4.jpg" alt="Chessboard" className="chessboard-image" />
-			<BoardPieces renderReg={renderReg} />
+			<BoardPieces />
 		</div>
 	);
 }

@@ -54,7 +54,7 @@ function renderBoard(board) {
 	));
 }
 
-function BoardPieces({renderReg}) {
+function BoardPieces() {
 	console.log('BoardPieces:', anonc_board());
 
 	let board = loadGame();
