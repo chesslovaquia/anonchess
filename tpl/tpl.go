@@ -45,6 +45,7 @@ func main() {
 var tplbase string = "tpl/base.html"
 
 func render(dst, src string, data doc) {
+	// clean
 	if cleanup {
 		if err := os.Remove(dst); err != nil {
 			if !os.IsNotExist(err) {
@@ -55,27 +56,25 @@ func render(dst, src string, data doc) {
 		}
 		return
 	}
-
+	// gen
 	t, err := template.ParseFiles(tplbase, src)
 	if err != nil {
 		log.Fatalf("%s - parse error: %v", src, err)
 	}
-
 	fh, err := os.Create(dst)
 	if err != nil {
 		log.Fatalf("%s: %v", dst, err)
 	}
 	defer fh.Close()
-
 	err = t.Execute(fh, &data)
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-
 	fmt.Println(dst)
 }
 
 func renderJS(dst, src string, data js) {
+	// clean
 	if cleanup {
 		if err := os.Remove(dst); err != nil {
 			if !os.IsNotExist(err) {
@@ -86,22 +85,19 @@ func renderJS(dst, src string, data js) {
 		}
 		return
 	}
-
+	// gen
 	t, err := template.ParseFiles(src)
 	if err != nil {
 		log.Fatalf("%s - parse error: %v", src, err)
 	}
-
 	fh, err := os.Create(dst)
 	if err != nil {
 		log.Fatalf("%s: %v", dst, err)
 	}
 	defer fh.Close()
-
 	err = t.Execute(fh, &data)
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-
 	fmt.Println(dst)
 }
