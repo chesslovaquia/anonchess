@@ -24,7 +24,7 @@ export function handleMove(renderReg, piece, sq1, sq2, move) {
 			sq2.innerHTML = '';
 			sq2.appendChild(piece);
 			console.log('handleMove:', move, 'done');
-			renderMove(renderReg);
+			renderMove(renderReg, move, tag);
 		} else {
 			console.log('handleMove:', move, 'failed');
 		}
@@ -38,6 +38,15 @@ export function handleMove(renderReg, piece, sq1, sq2, move) {
 //
 // renderMove
 //
-function renderMove(renderReg) {
+function renderMove(renderReg, move, tag) {
+	console.log('renderMove:', move, tag);
+	const clean_sq = anonc_enpassant(tag, move);
+	if (clean_sq !== '') {
+		renderEnPassant(clean_sq);
+	}
 	renderReg.current.sideBar();
+}
+
+function renderEnPassant(sq) {
+	console.log('renderEnPassant:', sq);
 }

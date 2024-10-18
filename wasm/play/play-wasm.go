@@ -10,6 +10,7 @@ import (
 	"syscall/js"
 
 	"chesslovaquia/anonchess/lib/game"
+	"chesslovaquia/anonchess/lib/moves"
 )
 
 func main() {
@@ -149,6 +150,22 @@ func main() {
 	})
 	defer anonc_turn_name.Release()
 	js.Global().Set("anonc_turn_name", anonc_turn_name)
+
+	//
+	// anonc_enpassant
+	//
+	anonc_enpassant := js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 2 {
+			fmt.Println("anonc_enpassant: invalid args")
+			return ""
+		}
+		t := strings.TrimSpace(args[0].String())
+		m := strings.TrimSpace(args[1].String())
+		fmt.Println("anonc_enpassant:", t, m)
+		return moves.EnPassant(t, m)
+	})
+	defer anonc_enpassant.Release()
+	js.Global().Set("anonc_enpassant", anonc_enpassant)
 
 	//
 	// main loop

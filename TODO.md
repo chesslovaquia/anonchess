@@ -1,11 +1,13 @@
 # TODO
 
 * Chessboard handle
-	* castle
 	* en passant
+	* castle
 	* promotions
 	* checks
 	* highlight kings on check mate
+	* stalemate
+	* draw
 
 * Move saved game from session to storage, to even persist if browser is closed by mistake or whatever. Maybe not? So we can have one game per tab?
 
