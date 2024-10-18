@@ -8,6 +8,8 @@ import (
 	"unicode"
 
 	"github.com/notnil/chess"
+
+	"chesslovaquia/anonchess/lib/moves"
 )
 
 var g *chess.Game
@@ -82,25 +84,25 @@ func MoveTag(m string) string {
 	move, err := chess.UCINotation{}.Decode(g.Position(), m)
 	if err != nil {
 		fmt.Printf("ERROR MoveTag: %s - %s\n", m, err)
-		return "error"
+		return moves.Error
 	}
 	if move.HasTag(chess.KingSideCastle) {
-		return "KingSideCastle"
+		return moves.KingSideCastle
 	}
 	if move.HasTag(chess.QueenSideCastle) {
-		return "QueenSideCastle"
+		return moves.QueenSideCastle
 	}
 	if move.HasTag(chess.EnPassant) {
-		return "EnPassant"
+		return moves.EnPassant
 	}
 	if move.HasTag(chess.Check) {
-		return "Check"
+		return moves.Check
 	}
 	// check Capture at the end
 	if move.HasTag(chess.Capture) {
-		return "Capture"
+		return moves.Capture
 	}
-	return ""
+	return moves.Move
 }
 
 func Dump() string {

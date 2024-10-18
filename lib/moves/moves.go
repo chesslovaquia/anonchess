@@ -3,8 +3,18 @@
 
 package moves
 
-func EnPassant(tag, move string) string {
-	if tag == "EnPassant" {
+const (
+	Error = "error"
+	KingSideCastle = "KingSideCastle"
+	QueenSideCastle = "QueenSideCastle"
+	EnPassant = "EnPassant"
+	Check = "Check"
+	Capture = "Capture"
+	Move = ""
+)
+
+func CheckEnPassant(tag, move string) string {
+	if tag == EnPassant {
 		if move == "e5d6" {
 			return "d5"
 		}

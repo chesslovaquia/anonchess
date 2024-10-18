@@ -162,7 +162,7 @@ func main() {
 		t := strings.TrimSpace(args[0].String())
 		m := strings.TrimSpace(args[1].String())
 		fmt.Println("anonc_enpassant:", t, m)
-		return moves.EnPassant(t, m)
+		return moves.CheckEnPassant(t, m)
 	})
 	defer anonc_enpassant.Release()
 	js.Global().Set("anonc_enpassant", anonc_enpassant)
