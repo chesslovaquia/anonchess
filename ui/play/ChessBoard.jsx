@@ -8,7 +8,7 @@ import { handleMove } from '../game.js';
 
 function ChessBoard({renderReg}) {
 	const highlight = '2px solid yellow';
-	const highlightTake = '2px solid green';
+	const highlightTake = '2px solid yellow';
 
 	let sq1 = null;
 	let sq2 = null;
