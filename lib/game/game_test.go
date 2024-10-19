@@ -7,10 +7,19 @@ import (
 	"testing"
 )
 
-const board = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+const pos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+const board = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+
+func initBoard(t *testing.T) {
+	t.Helper()
+	err := New(pos)
+	if err != nil {
+		t.Fatalf("init board error: %s", err)
+	}
+}
 
 func TestNewError(t *testing.T) {
-	err := New(board)
+	err := New(pos)
 	if err != nil {
 		t.Errorf("New: %s", err)
 	}
@@ -21,10 +30,18 @@ func TestNewError(t *testing.T) {
 }
 
 func TestPosition(t *testing.T) {
-	New(board)
+	initBoard(t)
 	p := Position()
-	if p != board {
-		t.Errorf("Position: got '%s' - expect '%s'", p, board)
+	if p != pos {
+		t.Errorf("Position: got '%s' - expect '%s'", p, pos)
+	}
+}
+
+func TestBoard(t *testing.T) {
+	initBoard(t)
+	b := Board()
+	if b != board {
+		t.Errorf("Board: got '%s' - expect '%s'", b, board)
 	}
 }
 
