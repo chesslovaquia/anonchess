@@ -7,6 +7,17 @@ import (
 	"testing"
 )
 
+func TestNewError(t *testing.T) {
+	err := New("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+	if err != nil {
+		t.Errorf("New: %s", err)
+	}
+	err = New("INVALID_FEN")
+	if err == nil {
+		t.Error("New: expected INVALID_FEN error")
+	}
+}
+
 func boardMapCheck(t *testing.T, expect []any) {
 	t.Helper()
 	board := BoardMap()
