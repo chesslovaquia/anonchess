@@ -1,7 +1,7 @@
-FROM debian:trixie-20240812-slim
+FROM debian:trixie-20241016-slim
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="240830"
+LABEL version="241019"
 
 USER root:root
 WORKDIR /root
