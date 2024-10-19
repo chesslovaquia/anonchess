@@ -109,6 +109,7 @@ upgrade:
 	go get go@latest
 	go get -u all
 	go mod tidy -v
+	go mod vendor
 	npm update
 
 #
