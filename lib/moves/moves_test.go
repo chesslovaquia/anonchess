@@ -23,8 +23,8 @@ func TestEnPassantMove(t *testing.T) {
 }
 
 func TestEnPassantError(t *testing.T) {
-	checkEnPassant(t, "none", "error")
-	checkEnPassant(t, "a2a3", "error")
+	checkEnPassant(t, "none", Error)
+	checkEnPassant(t, "a2a3", Error)
 }
 
 func TestEnPassantCapture(t *testing.T) {

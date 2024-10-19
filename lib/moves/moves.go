@@ -4,14 +4,39 @@
 package moves
 
 const (
-	Error = "error"
+	Error = "ERROR"
 	KingSideCastle = "KingSideCastle"
 	QueenSideCastle = "QueenSideCastle"
 	EnPassant = "EnPassant"
 	Check = "Check"
 	Capture = "Capture"
-	Move = ""
+	Move = "Move"
 )
+
+func ValidEnPassant(tag string) bool {
+	if tag == Error {
+		return false
+	}
+	if tag == KingSideCastle {
+		return false
+	}
+	if tag == QueenSideCastle {
+		return false
+	}
+	if tag == EnPassant {
+		return false
+	}
+	if tag == Check {
+		return false
+	}
+	if tag == Capture {
+		return false
+	}
+	if tag == Move {
+		return false
+	}
+	return true
+}
 
 func CheckEnPassant(tag, move string) string {
 	// avoid calculations

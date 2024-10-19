@@ -34,6 +34,15 @@ func main() {
 	js.Global().Set("anonc_board_map", anonc_board_map)
 
 	//
+	// anonc_position
+	//
+	anonc_position := js.FuncOf(func(this js.Value, args []js.Value) any {
+		return game.Position()
+	})
+	defer anonc_position.Release()
+	js.Global().Set("anonc_position", anonc_position)
+
+	//
 	// anonc_valid_move
 	//
 	anonc_valid_move := js.FuncOf(func(this js.Value, args []js.Value) any {
@@ -81,8 +90,10 @@ func main() {
 			return false
 		}
 		m := strings.TrimSpace(args[0].String())
+		fmt.Println("anonc_move_tag: check move", m)
+		t := game.MoveTag(m)
 		fmt.Println("anonc_move_tag:", m)
-		return game.MoveTag(m)
+		return t
 	})
 	defer anonc_move_tag.Release()
 	js.Global().Set("anonc_move_tag", anonc_move_tag)
@@ -166,6 +177,21 @@ func main() {
 	})
 	defer anonc_enpassant.Release()
 	js.Global().Set("anonc_enpassant", anonc_enpassant)
+
+	//
+	// anonc_enpassant_valid
+	//
+	anonc_enpassant_valid := js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 1 {
+			fmt.Println("anonc_enpassant: no args")
+			return false
+		}
+		m := strings.TrimSpace(args[0].String())
+		fmt.Println("anonc_enpassant_valid:", m)
+		return moves.ValidEnPassant(m)
+	})
+	defer anonc_enpassant_valid.Release()
+	js.Global().Set("anonc_enpassant_valid", anonc_enpassant_valid)
 
 	//
 	// main loop

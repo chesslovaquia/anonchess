@@ -32,7 +32,8 @@ export function handleMove(renderReg, piece, sq1, sq2, move) {
 		console.log('handleMove:', move, 'invalid');
 		sq2.style.border = '2px solid red';
 	}
-	console.log('handleMove: board', anonc_board());
+	//~ console.log('handleMove: board', anonc_board());
+	console.log('position:', anonc_position());
 }
 
 //
@@ -40,8 +41,8 @@ export function handleMove(renderReg, piece, sq1, sq2, move) {
 //
 function renderMove(renderReg, move, tag) {
 	console.log('renderMove:', move, tag);
-	const clean_sq = anonc_enpassant(tag, move);
-	if (clean_sq !== '') {
+	const sq = anonc_enpassant(tag, move);
+	if (anonc_enpassant_valid(sq)) {
 		renderEnPassant(clean_sq);
 	}
 	renderReg.current.sideBar();
@@ -49,8 +50,6 @@ function renderMove(renderReg, move, tag) {
 
 function renderEnPassant(sq) {
 	console.log('renderEnPassant:', sq);
-	if (sq !== 'error') {
-		const clean_sq = document.getElementById(`square-${sq}`);
-		clean_sq.innerHTML = '';
-	}
+	const clean_sq = document.getElementById(`square-${sq}`);
+	clean_sq.innerHTML = '';
 }
