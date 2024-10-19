@@ -16,7 +16,7 @@ all:
 .PHONY: clean
 clean:
 	@TPL=clean go run ./tpl
-	@rm -vrf static/pkg static/ui publish docker/build
+	@rm -vrf static/pkg static/ui publish docker/build htmlcov
 	@rm -vf ui/wasm_exec.js
 
 .PHONY: distclean
@@ -102,6 +102,16 @@ play: play-go play-js
 test:
 	go test . ./cmd/... ./lib/...
 	wasm/test.sh ./wasm/...
+
+#
+# cover
+#
+.PHONY: cover
+cover:
+	@mkdir -p htmlcov
+	go test -coverprofile htmlcov/coverage.out . ./cmd/... ./lib/...
+	go tool cover -html htmlcov/coverage.out -o htmlcov/index.html
+#~ 	wasm/cover.sh ./wasm/...
 
 #
 # release
