@@ -22,7 +22,7 @@ clean:
 .PHONY: distclean
 distclean: clean
 	@rm -vrf node_modules
-	go clean -cache -modcache
+	@go clean -cache -modcache
 
 .PHONY: docker
 docker:
