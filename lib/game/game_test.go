@@ -5,6 +5,8 @@ package game
 
 import (
 	"testing"
+
+	"hash/fnv"
 )
 
 const pos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
@@ -16,6 +18,12 @@ func initBoard(t *testing.T) {
 	if err != nil {
 		t.Fatalf("init board error: %s", err)
 	}
+}
+
+func hash(s string) uint32 {
+	h := fnv.New32a()
+	h.Write([]byte(s))
+	return h.Sum32()
 }
 
 func TestNewError(t *testing.T) {
@@ -42,6 +50,17 @@ func TestBoard(t *testing.T) {
 	b := Board()
 	if b != board {
 		t.Errorf("Board: got '%s' - expect '%s'", b, board)
+	}
+}
+
+func TestBoardDraw(t *testing.T) {
+	initBoard(t)
+	bd := BoardDraw()
+	expect := uint32(2355033525)
+	h := hash(bd)
+	if h != expect {
+		t.Logf("BoardDraw: %s", bd)
+		t.Errorf("BoardDraw hash: got '%d' - expect '%d'", h, expect)
 	}
 }
 
