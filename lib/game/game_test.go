@@ -7,14 +7,24 @@ import (
 	"testing"
 )
 
+const board = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 func TestNewError(t *testing.T) {
-	err := New("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+	err := New(board)
 	if err != nil {
 		t.Errorf("New: %s", err)
 	}
 	err = New("INVALID_FEN")
 	if err == nil {
 		t.Error("New: expected INVALID_FEN error")
+	}
+}
+
+func TestPosition(t *testing.T) {
+	New(board)
+	p := Position()
+	if p != board {
+		t.Errorf("Position: got '%s' - expect '%s'", p, board)
 	}
 }
 
