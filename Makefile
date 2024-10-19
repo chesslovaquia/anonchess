@@ -96,6 +96,14 @@ play-go:
 play: play-go play-js
 
 #
+# upgrade
+#
+.PHONY: upgrade
+upgrade:
+	@go version
+	go mod edit -go=`go version | cut -d ' ' -f 3 | tr -d 'go'`
+
+#
 # test
 #
 .PHONY: test
