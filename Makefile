@@ -17,11 +17,12 @@ all:
 clean:
 	@TPL=clean go run ./tpl
 	@rm -vrf static/pkg static/ui publish docker/build htmlcov
-	@rm -vf ui/wasm_exec.js
+	@rm -vf ui/wasm_exec.js static/package.json
 
 .PHONY: distclean
 distclean: clean
 	@rm -vrf node_modules
+	go clean -cache -modcache
 
 .PHONY: docker
 docker:
@@ -104,6 +105,7 @@ upgrade:
 	go get go@latest
 	go get -u all
 	go mod tidy -v
+	npm update
 
 #
 # test
