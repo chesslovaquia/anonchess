@@ -101,7 +101,8 @@ play: play-go play-js
 .PHONY: upgrade
 upgrade:
 	@go version
-	@go get go@latest
+	go get go@latest
+	go get -u all
 	go mod tidy -v
 
 #
