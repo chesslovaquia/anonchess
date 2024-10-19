@@ -135,3 +135,24 @@ func TestValidMoves(t *testing.T) {
 		t.Errorf("ValidMoves Error\ngot:    '%s'\nexpect: '%s'", got, expect)
 	}
 }
+
+func TestMoveInvalidUCI(t *testing.T) {
+	initBoard(t)
+	if err := Move("UCI"); err == nil {
+		t.Errorf("Move expected invalid UCI but got %v", err)
+	}
+}
+
+func TestMove(t *testing.T) {
+	initBoard(t)
+	if err := Move("a2a3"); err != nil {
+		t.Errorf("Move a2a3 error: %s", err)
+	}
+}
+
+func TestMoveError(t *testing.T) {
+	initBoard(t)
+	if err := Move("a2a1"); err == nil {
+		t.Errorf("Move expected invalid a2a1 but got %v", err)
+	}
+}
