@@ -102,6 +102,7 @@ play: play-go play-js
 upgrade:
 	@go version
 	@go get go@latest
+	go mod tidy -v
 
 #
 # test
