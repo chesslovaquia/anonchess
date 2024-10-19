@@ -28,6 +28,10 @@ distclean: clean
 docker:
 	@docker/build.sh
 
+.PHONY: favicon
+favicon:
+	convert static/lila/public/piece/cburnett/bN.png -define icon:auto-resize=256,128,64,48,32,24,16 static/favicon.ico
+
 #
 # build
 #
