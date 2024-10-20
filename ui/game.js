@@ -13,9 +13,10 @@ function saveGame() {
 export function handleMove(renderReg, piece, sq1, sq2, move) {
 	console.log('handleMove:', move);
 	if (anonc_valid_move(move)) {
-		const tag = anonc_move_tag(move);
-		console.log('move tag:', tag);
-		if (anonc_move(move)) {
+		const tag = anonc_move(move)
+		if (anonc_move_failed(tag)) {
+			console.log('handleMove:', move, 'failed');
+		} else {
 			saveGame();
 			piece.style.top = `${sq2.offsetTop}px`;
 			piece.style.left = `${sq2.offsetLeft}px`;
@@ -23,10 +24,8 @@ export function handleMove(renderReg, piece, sq1, sq2, move) {
 			sq1.innerHTML = '';
 			sq2.innerHTML = '';
 			sq2.appendChild(piece);
-			console.log('handleMove:', move, 'done');
+			console.log('handleMove:', tag, 'done');
 			renderMove(renderReg, move, tag);
-		} else {
-			console.log('handleMove:', move, 'failed');
 		}
 	} else {
 		console.log('handleMove:', move, 'invalid');
@@ -41,15 +40,16 @@ export function handleMove(renderReg, piece, sq1, sq2, move) {
 //
 function renderMove(renderReg, move, tag) {
 	console.log('renderMove:', move, tag);
-	const sq = anonc_enpassant(tag, move);
-	if (anonc_enpassant_valid(sq)) {
-		renderEnPassant(clean_sq);
+	if (anonc_is_enpassant(tag)) {
+		renderEnPassant(move);
 	}
 	renderReg.current.sideBar();
 }
 
-function renderEnPassant(sq) {
-	console.log('renderEnPassant:', sq);
+function renderEnPassant(move) {
+	console.log('renderEnPassant:', move);
+	const sq = anonc_enpassant_take(move);
+	console.log('renderEnPassant take:', sq);
 	const clean_sq = document.getElementById(`square-${sq}`);
 	clean_sq.innerHTML = '';
 }

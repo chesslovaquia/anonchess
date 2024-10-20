@@ -10,7 +10,14 @@ import (
 	"syscall/js"
 
 	"chesslovaquia/anonchess/lib/game"
-	"chesslovaquia/anonchess/lib/moves"
+	"chesslovaquia/anonchess/wasm"
+)
+
+var (
+	AnoncMove          js.Func
+	AnoncMoveFailed    js.Func
+	AnoncIsEnPassant   js.Func
+	AnoncEnPassantTake js.Func
 )
 
 func main() {
@@ -61,42 +68,6 @@ func main() {
 	})
 	defer anonc_valid_move.Release()
 	js.Global().Set("anonc_valid_move", anonc_valid_move)
-
-	//
-	// anonc_move
-	//
-	anonc_move := js.FuncOf(func(this js.Value, args []js.Value) any {
-		if len(args) != 1 {
-			fmt.Println("anonc_move: no args")
-			return false
-		}
-		m := strings.TrimSpace(args[0].String())
-		fmt.Println("anonc_move:", m)
-		if err := game.Move(m); err != nil {
-			fmt.Println("[ERROR] anonc_move:", err)
-			return false
-		}
-		return true
-	})
-	defer anonc_move.Release()
-	js.Global().Set("anonc_move", anonc_move)
-
-	//
-	// anonc_move_tag
-	//
-	anonc_move_tag := js.FuncOf(func(this js.Value, args []js.Value) any {
-		if len(args) != 1 {
-			fmt.Println("anonc_move_tag: no args")
-			return false
-		}
-		m := strings.TrimSpace(args[0].String())
-		fmt.Println("anonc_move_tag: check move", m)
-		t := game.MoveTag(m)
-		fmt.Println("anonc_move_tag:", m)
-		return t
-	})
-	defer anonc_move_tag.Release()
-	js.Global().Set("anonc_move_tag", anonc_move_tag)
 
 	//
 	// anonc_game_dump
@@ -162,36 +133,35 @@ func main() {
 	defer anonc_turn_name.Release()
 	js.Global().Set("anonc_turn_name", anonc_turn_name)
 
-	//
-	// anonc_enpassant
-	//
-	anonc_enpassant := js.FuncOf(func(this js.Value, args []js.Value) any {
-		if len(args) != 2 {
-			fmt.Println("anonc_enpassant: invalid args")
-			return ""
-		}
-		t := strings.TrimSpace(args[0].String())
-		m := strings.TrimSpace(args[1].String())
-		fmt.Println("anonc_enpassant:", t, m)
-		return moves.CheckEnPassant(t, m)
-	})
-	defer anonc_enpassant.Release()
-	js.Global().Set("anonc_enpassant", anonc_enpassant)
+
 
 	//
-	// anonc_enpassant_valid
+	// anonc_move
 	//
-	anonc_enpassant_valid := js.FuncOf(func(this js.Value, args []js.Value) any {
-		if len(args) != 1 {
-			fmt.Println("anonc_enpassant: no args")
-			return false
-		}
-		m := strings.TrimSpace(args[0].String())
-		fmt.Println("anonc_enpassant_valid:", m)
-		return moves.ValidEnPassant(m)
-	})
-	defer anonc_enpassant_valid.Release()
-	js.Global().Set("anonc_enpassant_valid", anonc_enpassant_valid)
+	AnoncMove = wasm.Move()
+	defer AnoncMove.Release()
+	js.Global().Set("anonc_move", AnoncMove)
+
+	//
+	// anonc_move_failed
+	//
+	AnoncMoveFailed = wasm.MoveFailed()
+	defer AnoncMoveFailed.Release()
+	js.Global().Set("anonc_move_failed", AnoncMoveFailed)
+
+	//
+	// anonc_is_enpassant
+	//
+	AnoncIsEnPassant = wasm.IsEnPassant()
+	defer AnoncIsEnPassant.Release()
+	js.Global().Set("anonc_is_enpassant", AnoncIsEnPassant)
+
+	//
+	// anonc_enpassant_take
+	//
+	AnoncEnPassantTake = wasm.EnPassantTake()
+	defer AnoncEnPassantTake.Release()
+	js.Global().Set("anonc_enpassant_take", AnoncEnPassantTake)
 
 	//
 	// main loop

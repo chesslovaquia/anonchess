@@ -70,23 +70,20 @@ func ValidMoves() []string {
 	return vm
 }
 
-func Move(m string) error {
+func Move(m string) string {
 	move, err := chess.UCINotation{}.Decode(g.Position(), m)
 	if err != nil {
-		return err
-	} else {
-		fmt.Println("Move:", move)
-	}
-	return g.Move(move)
-}
-
-func MoveTag(m string) string {
-	fmt.Println("MoveTag: check", m)
-	move, err := chess.UCINotation{}.Decode(g.Position(), m)
-	fmt.Println("MoveTag:", move)
-	if err != nil {
+		fmt.Println("ERROR Move:", err)
 		return moves.Error
 	}
+	if err := g.Move(move); err != nil {
+		fmt.Println("ERROR Move:", err)
+		return moves.Error
+	}
+	return MoveTag(move)
+}
+
+func MoveTag(move *chess.Move) string {
 	if move.HasTag(chess.KingSideCastle) {
 		return moves.KingSideCastle
 	}
