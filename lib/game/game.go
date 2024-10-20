@@ -80,10 +80,10 @@ func Move(m string) string {
 		fmt.Println("ERROR Move:", err)
 		return moves.Error
 	}
-	return MoveTag(move)
+	return moveTag(move)
 }
 
-func MoveTag(move *chess.Move) string {
+func moveTag(move *chess.Move) string {
 	if move.HasTag(chess.KingSideCastle) {
 		return moves.KingSideCastle
 	}

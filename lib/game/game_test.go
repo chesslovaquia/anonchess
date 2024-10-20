@@ -148,67 +148,67 @@ func TestValidMoves(t *testing.T) {
 
 func TestMoveInvalidUCI(t *testing.T) {
 	initBoard(t)
-	if err := Move("UCI"); err == nil {
-		t.Errorf("Move expected invalid UCI but got %v", err)
+	if tag := Move("UCI"); tag != moves.Error {
+		t.Errorf("Move expected invalid UCI but got %s", tag)
 	}
 }
 
 func TestMove(t *testing.T) {
 	initBoard(t)
-	if err := Move("a2a3"); err != nil {
-		t.Errorf("Move a2a3 error: %s", err)
+	if tag := Move("a2a3"); tag != moves.Move {
+		t.Errorf("Move a2a3 tag error: %s", tag)
 	}
 }
 
 func TestMoveError(t *testing.T) {
 	initBoard(t)
-	if err := Move("a2a1"); err == nil {
-		t.Errorf("Move expected invalid a2a1 but got %v", err)
+	if tag := Move("a2a1"); tag != moves.Error {
+		t.Errorf("Move a2a2 expected error tag but got %s", tag)
 	}
 }
 
 func TestMoveTag(t *testing.T) {
 	initBoard(t)
-	if m := MoveTag("a2a3"); m != moves.Move {
-		t.Errorf("MoveTag expected '%s' - got '%s'", moves.Move, m)
+	if tag := Move("a2a3"); tag != moves.Move {
+		t.Errorf("MoveTag expected '%s' - got '%s'", moves.Move, tag)
 	}
 }
 
 func TestMoveTagInvalidUCI(t *testing.T) {
 	initBoard(t)
-	if m := MoveTag("UCI"); m != moves.Error {
-		t.Errorf("MoveTag expected '%s' - got '%s'", moves.Error, m)
+	if tag := Move("UCI"); tag != moves.Error {
+		t.Errorf("MoveTag expected '%s' - got '%s'", moves.Error, tag)
 	}
 }
 
 func TestMoveTagKingSideCastle(t *testing.T) {
 	pos := "rnbqkbnr/pp3ppp/2p5/3pp3/4P3/3B1N2/PPPP1PPP/RNBQK2R w KQkq e6 0 4"
 	initPosition(t, pos)
-	if m := MoveTag("e1g1"); m != moves.KingSideCastle {
-		t.Errorf("MoveTag expected '%s' - got '%s'", moves.KingSideCastle, m)
+	if tag := Move("e1g1"); tag != moves.KingSideCastle {
+		t.Errorf("MoveTag expected '%s' - got '%s'", moves.KingSideCastle, tag)
 	}
 }
 
 func TestMoveTagQueenSideCastle(t *testing.T) {
 	pos := "r3kbnr/pp1n1ppp/1qp1b3/3pp3/1P2P3/2PB1N1P/P2P1PP1/RNBQ1RK1 b kq - 0 7"
 	initPosition(t, pos)
-	if m := MoveTag("e8c8"); m != moves.QueenSideCastle {
-		t.Errorf("MoveTag expected '%s' - got '%s'", moves.QueenSideCastle, m)
+	if tag := Move("e8c8"); tag != moves.QueenSideCastle {
+		t.Errorf("MoveTag expected '%s' - got '%s'", moves.QueenSideCastle, tag)
 	}
 }
 
 func TestMoveTagEnPassant(t *testing.T) {
 	pos := "rnbqkbnr/ppp2ppp/4p3/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 3"
 	initPosition(t, pos)
-	if m := MoveTag("e5d6"); m != moves.EnPassant {
-		t.Errorf("MoveTag expected '%s' - got '%s'", moves.EnPassant, m)
+	if tag := Move("e5d6"); tag != moves.EnPassant {
+		t.Errorf("MoveTag expected '%s' - got '%s'", moves.EnPassant, tag)
 	}
 }
 
 //~ func TestMoveTagCheck(t *testing.T) {
 	//~ pos := "rnbqkbnr/ppp1pppp/3p4/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2"
 	//~ initPosition(t, pos)
-	//~ if m := MoveTag("f1b5"); m != moves.Check {
-		//~ t.Errorf("MoveTag expected '%s' - got '%s'", moves.Check, m)
+	//~ if tag := Move("f1b5"); tag != moves.Check {
+		//~ t.Errorf("MoveTag expected '%s' - got '%s'", moves.Check, tag)
 	//~ }
 //~ }
